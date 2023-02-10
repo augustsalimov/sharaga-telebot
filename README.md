@@ -2,15 +2,17 @@
 Местный telegram-бот для пользования группой.
 
 ## Инструменты
-- Python 3.11 <br>
-- Aiosqlite <br>
-- Python-telegram-bot <br>
-- Jinja 2 <br>
+- Python 3.11
+- Aiosqlite
+- Python-telegram-bot
+- Jinja 2
 
 ## Команды
 - /start - приветственное сообщение
 - /help — справка
 - /links — все важные ссылки
 - /shedule - расписание
-- /today_class - пара сегодня
+- /deadlines - ближайшие дедлайны
+- /today_class - какая сегодня пара и детальная информация по ней 
+- /pidor - пи8ор дня <br>
 Приколяшки
