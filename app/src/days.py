@@ -28,16 +28,9 @@ async def get_today_info() -> Iterable[Day]:
 async def get_schedule_for_this_week() -> Iterable[Day]:
     sql = f"""{_days_base_sql_request()}
             WHERE my_date >= "{mydatetime.today()}" 
-            and my_date <= "2023-02-17" """
+            and my_date <= "{mydatetime.sunday_date()}" """
     days = await _get_days_from_db(sql)
     return days
-
-
-'''async def get_today() -> Iterable[Day]:
-    sql = f"""{_days_base_sql_request()}
-              ORDER BY d."my_date" """
-    days = await _get_days_from_db(sql)
-    return _dict_days_by_datetime_key(days)'''
 
 
 def _days_base_sql_request(select_param: LiteralString | None = None) -> LiteralString:

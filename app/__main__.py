@@ -11,8 +11,9 @@ from app.db_model import close_db
 COMMAND_HANDLERS = {
     "start": handlers.start,
     "help": handlers.help,
-    "today_class": handlers.today_class,
-    "schedule": handlers.schedule,
+    "today": handlers.today,
+    "this_week": handlers.week_lessons,
+    "links": handlers.links
 }
 
 
