@@ -6,11 +6,11 @@ from app.src.days import get_today_info
 from app.templates import render_template
 
 
-async def today_class(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    today_class = ""
-    template = "today_class.j2"
+async def today(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    today_lesson = ""
+    template = "today.j2"
     try:
-        today_class = list(await get_today_info())[0]
+        today_lesson = list(await get_today_info())[0]
     except:
         template = "vacation.j2"
 
@@ -22,6 +22,6 @@ async def today_class(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context,
         render_template(
             template,
-            {"today": today_class},
+            {"lesson": today_lesson},
         ),
     )

@@ -6,12 +6,12 @@ from app.src.days import get_schedule_for_this_week
 from app.templates import render_template
 
 
-async def schedule(update: Update, context: ContextTypes.DEFAULT_TYPE):
+async def week_lessons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     this_week_lessons = list(await get_schedule_for_this_week())
     if this_week_lessons == []:
         template = "vacations.j2"
     else:
-        template = "schedule.j2"
+        template = "week_lessons.j2"
 
     if not update.message:
         return
