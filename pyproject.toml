@@ -8,6 +8,7 @@ packages = [{include = "app"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"
+pytz = "^2022.7.1"
 
 [tool.poetry.group.dev.dependencies]
 python-telegram-bot = "^20.1"
