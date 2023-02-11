@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "sharaga-telebot"
+version = "0.1.0"
+description = "telegram bot for sharaga"
+authors = ["August"]
+readme = "README.md"
+packages = [{include = "app"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+pytz = "^2022.7.1"
+
+[tool.poetry.group.dev.dependencies]
+python-telegram-bot = "^20.1"
+aiosqlite = "^0.18.0"
+python-dotenv = "^0.21.1"
+Jinja2 = "^3.1.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
