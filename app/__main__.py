@@ -8,6 +8,7 @@ from telegram.ext import (
 from app import config, handlers
 from app.db_model import close_db
 
+
 COMMAND_HANDLERS = {
     "start": handlers.start,
     "help": handlers.help,
@@ -24,9 +25,7 @@ logger = logging.getLogger(__name__)
 
 
 if not config.TELEGRAM_BOT_TOKEN: # or not config.TELEGRAM_BOT_CHANNEL_ID:
-    raise ValueError(
-        "env variables wasn't implemented in .env"
-    )
+    raise ValueError("env variables wasn't implemented")
 
 
 def main():

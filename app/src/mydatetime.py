@@ -1,5 +1,7 @@
 from datetime import datetime, timedelta
+from collections.abc import Iterable
 import pytz
+
 
 def timenow() -> datetime:
     return datetime.now(pytz.timezone('Europe/Moscow'))
@@ -13,7 +15,7 @@ def weekday() -> str:
     return timenow().weekday() + 1
 
 
-def this_week_dates() -> list[str]:
+def this_week_dates() -> Iterable[str]:
     days_left_in_week = 7 - weekday()
     return [_typer(datetime.now() + timedelta(days=i)) for i in range(days_left_in_week)]
 

@@ -1,10 +1,9 @@
 from collections.abc import Iterable
 from dataclasses import dataclass
-from typing import LiteralString, cast
 
-from app import config
 from app.db_model import fetch_all
 from app.src import mydatetime
+
 
 @dataclass
 class Day:
@@ -14,8 +13,6 @@ class Day:
     cab: str
     lecturer_name: str
     subject_name: str
-    lecturer_id: int = None
-    subject_id: int = None
 
 
 async def get_today_info() -> Iterable[Day]:
@@ -33,7 +30,7 @@ async def get_schedule_for_this_week() -> Iterable[Day]:
     return days
 
 
-def _days_base_sql_request(select_param: LiteralString | None = None) -> LiteralString:
+def _days_base_sql_request() -> str:
     return f"""
         SELECT
             d.id as id,
@@ -48,7 +45,7 @@ def _days_base_sql_request(select_param: LiteralString | None = None) -> Literal
     """
 
 
-async def _get_days_from_db(sql: LiteralString) -> list[Day]:
+async def _get_days_from_db(sql: str) -> Iterable[Day]:
     day_raw = await fetch_all(sql)
     return [
         Day(

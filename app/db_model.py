@@ -1,8 +1,8 @@
 import asyncio
-from collections.abc import Iterable
-from typing import Any, LiteralString
-
 import aiosqlite
+
+from collections.abc import Iterable
+from typing import Any
 
 from app import config
 
@@ -16,7 +16,7 @@ async def get_db() -> aiosqlite.Connection:
 
 
 async def fetch_all(
-    sql: LiteralString, params: Iterable[Any] | None = None
+    sql: str, params: Iterable[Any] = None
 ) -> list[dict]:
     cursor = await _get_cursor(sql, params)
     rows = await cursor.fetchall()
@@ -26,41 +26,29 @@ async def fetch_all(
     return results
 
 
-async def fetch_one(
-    sql: LiteralString, params: Iterable[Any] | None = None
-) -> dict | None:
-    cursor = await _get_cursor(sql, params)
-    row_ = await cursor.fetchone()
-    if not row_:
-        return None
-    row = _get_result_with_column_names(cursor, row_)
-    await cursor.close()
-    return row
-
-
 async def execute(
-    sql: LiteralString, params: Iterable[Any] | None = None, *, autocommit: bool = True
+    sql: str, params: Iterable[Any] | None = None, *, autocommit: bool = True
 ) -> None:
     db = await get_db()
-    args: tuple[LiteralString, Iterable[Any] | None] = (sql, params)
+    args: tuple[str, Iterable[Any] | None] = (sql, params)
     await db.execute(*args)
     if autocommit:
         await db.commit()
 
 
-def close_db() -> None:
+def close_db():
     asyncio.run(_async_close_db())
 
 
-async def _async_close_db() -> None:
+async def _async_close_db():
     await (await get_db()).close()
 
 
 async def _get_cursor(
-    sql: LiteralString, params: Iterable[Any] | None
+    sql: str, params: Iterable[Any] | None
 ) -> aiosqlite.Cursor:
     db = await get_db()
-    args: tuple[LiteralString, Iterable[Any] | None] = (sql, params)
+    args: tuple[str, Iterable[Any] | None] = (sql, params)
     cursor = await db.execute(*args)
     db.row_factory = aiosqlite.Row
     return cursor
