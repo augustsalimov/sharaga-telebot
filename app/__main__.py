@@ -6,11 +6,13 @@ from telegram.ext import (
 )
 
 from app import config, handlers
-# from app.db import close_db
+from app.db_model import close_db
 
 COMMAND_HANDLERS = {
     "start": handlers.start,
     "help": handlers.help,
+    "today_class": handlers.today_class,
+    "schedule": handlers.schedule,
 }
 
 
@@ -42,5 +44,5 @@ if __name__ == "__main__":
         import traceback
 
         logger.warning(traceback.format_exc())
-    '''finally:
-        close_db()'''
+    finally:
+        close_db()

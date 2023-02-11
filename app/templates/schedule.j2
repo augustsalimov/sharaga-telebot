@@ -1,0 +1,7 @@
+{% for lesson in lessons %}
+    Расписание на {{ lesson.date }}: <br>
+
+    Предмет: [{{ lesson.l_s }}] {{ lesson.subject_name }} <br>
+    Препод: {{ lesson.lecturer_name }} <br>
+    Кабинет: {{ lesson.cab }} <br><br>
+{% endfor %}

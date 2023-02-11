@@ -11,7 +11,7 @@ TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "")
 
 
 BASE_DIR = Path(__file__).resolve().parent
-# SQLITE_DB_FILE = BASE_DIR / "db.sqlite3"
+SQLITE_DB_FILE = BASE_DIR / "db.sqlite3"
 TEMPLATES_DIR = BASE_DIR / "templates"
 
 DATE_FORMAT = "%d.%m.%Y"
