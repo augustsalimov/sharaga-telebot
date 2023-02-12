@@ -14,6 +14,7 @@ COMMAND_HANDLERS = {
     "commands": handlers.commands,
     "version": handlers.version,
     "links": handlers.links,
+    "contacts": handlers.contacts,
     "today": handlers.today,
     "tomorrow": handlers.tommorow,
     "this_week": handlers.this_week,
