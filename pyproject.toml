@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "sharaga-telebot"
-version = "0.1.0"
+version = "1.0.1"
 description = "telegram bot for sharaga"
 authors = ["August"]
 readme = "README.md"
@@ -9,6 +9,7 @@ packages = [{include = "app"}]
 [tool.poetry.dependencies]
 python = "^3.11"
 pytz = "^2022.7.1"
+ruff = "^0.0.245"
 
 [tool.poetry.group.dev.dependencies]
 python-telegram-bot = "^20.1"
@@ -19,3 +20,6 @@ Jinja2 = "^3.1.2"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+ignore = ["E701"]

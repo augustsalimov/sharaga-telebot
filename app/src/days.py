@@ -46,7 +46,7 @@ async def get_schedule_for_next_week() -> Iterable[Day]:
 
 
 def _days_base_sql_request() -> str:
-    return f"""
+    return """
         SELECT
             d.id as id,
             d.my_date as my_date,

@@ -21,7 +21,7 @@ async def today(update: Update, context: ContextTypes.DEFAULT_TYPE):
     template = SINGLE_TEMPLATE
     try:
         today_lesson = list(await get_today_schedule())[0]
-    except:
+    except Exception:
         today_lesson = ""
         template = TODAY_VACATION_TEMPLATE
 
@@ -40,7 +40,7 @@ async def tommorow(update: Update, context: ContextTypes.DEFAULT_TYPE):
     template = SINGLE_TEMPLATE
     try:
         tomorrow_lesson = list(await get_tomorrow_schedule())[0]
-    except:
+    except Exception:
         tomorrow_lesson = ""
         template = TOMORROW_VACATION_TEMPLATE
     if not update.message: return
