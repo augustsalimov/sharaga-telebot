@@ -11,10 +11,15 @@ from app.db_model import close_db
 
 COMMAND_HANDLERS = {
     "start": handlers.start,
-    "help": handlers.help,
+    "commands": handlers.commands,
+    "version": handlers.version,
+    "links": handlers.links,
     "today": handlers.today,
-    "this_week": handlers.week_lessons,
-    "links": handlers.links
+    "tomorrow": handlers.tommorow,
+    "this_week": handlers.this_week,
+    "next_week": handlers.next_week,
+    "whole_schedule": handlers.whole_schedule,
+    "mqu": handlers.mqu,
 }
 
 
