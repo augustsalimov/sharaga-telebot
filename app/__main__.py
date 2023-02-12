@@ -11,10 +11,10 @@ from app.db_model import close_db
 
 COMMAND_HANDLERS = {
     "start": handlers.start,
-    "help": handlers.help,
+    "commands": handlers.commands,
+    "links": handlers.links,
     "today": handlers.today,
-    "this_week": handlers.week_lessons,
-    "links": handlers.links
+    "this_week": handlers.week_lessons
 }
 
 

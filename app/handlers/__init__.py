@@ -1,13 +1,13 @@
 from .start import start
-from .help import help
+from .commands import commands
+from .links import links
 from .today import today
 from .week_lessons import week_lessons
-from .links import links
 
 __all__ = [
     "start",
-    "help",
+    "commands",
+    "links",
     "today",
-    "week_lessons",
-    "links"
+    "week_lessons"
 ]

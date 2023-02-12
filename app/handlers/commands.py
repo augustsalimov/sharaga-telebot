@@ -5,5 +5,5 @@ from app.handlers.response import send_response
 from app.templates import render_template
 
 
-async def help(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await send_response(update, context, response=render_template("help.j2"))
+async def commands(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await send_response(update, context, response=render_template("commands.j2"))
