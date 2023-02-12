@@ -15,9 +15,16 @@ class Day:
     subject_name: str
 
 
-async def get_today_info() -> Iterable[Day]:
+async def get_today_schedule() -> Iterable[Day]:
     sql = f"""{_days_base_sql_request()}
             WHERE my_date = "{mydatetime.today()}" """
+    days = await _get_days_from_db(sql)
+    return days
+
+
+async def get_tomorrow_schedule() -> Iterable[Day]:
+    sql = f"""{_days_base_sql_request()}
+            WHERE my_date = "{mydatetime.tomorrow()}" """
     days = await _get_days_from_db(sql)
     return days
 
@@ -26,6 +33,14 @@ async def get_schedule_for_this_week() -> Iterable[Day]:
     sql = f"""{_days_base_sql_request()}
             WHERE my_date >= "{mydatetime.today()}" 
             and my_date <= "{mydatetime.sunday_date()}" """
+    days = await _get_days_from_db(sql)
+    return days
+
+
+async def get_schedule_for_next_week() -> Iterable[Day]:
+    sql = f"""{_days_base_sql_request()}
+            WHERE my_date >= "{mydatetime.next_monday_date()}" 
+            and my_date <= "{mydatetime.next_sunday_date()}" """
     days = await _get_days_from_db(sql)
     return days
 
