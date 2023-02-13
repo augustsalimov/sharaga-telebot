@@ -9,6 +9,8 @@ from .schedule import this_week
 from .schedule import next_week
 from .schedule import whole_schedule
 from .mems import mqu
+from .mems import russia
+from .mems import recipe
 
 __all__ = [
     "start",
@@ -21,5 +23,7 @@ __all__ = [
     "this_week",
     "next_week",
     "whole_schedule",
-    "mqu"
+    "mqu",
+    "russia",
+    "recipe",
 ]
