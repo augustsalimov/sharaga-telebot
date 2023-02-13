@@ -4,8 +4,8 @@ import pytz
 
 
 def this_week_dates() -> Iterable[str]:
-    days_left_in_week = 7 - _weekday()
-    return [_typer(datetime.now() + timedelta(days=i)) for i in range(days_left_in_week)]
+    days_left = 7 - _weekday()
+    return [_typer(datetime.now() + timedelta(days=i)) for i in range(days_left)]
 
 
 def today() -> str:
