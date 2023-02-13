@@ -21,6 +21,8 @@ COMMAND_HANDLERS = {
     "next_week": handlers.next_week,
     "whole_schedule": handlers.whole_schedule,
     "mqu": handlers.mqu,
+    "russia": handlers.russia,
+    "recipe": handlers.recipe,
 }
 
 
