@@ -1,7 +1,7 @@
 from telegram import Update
 from telegram.ext import ContextTypes
 
-from app.handlers.response import send_text, send_document
+from app.handlers.bot import send_text, send_document
 from app.src.days import get_today_schedule
 from app.src.days import get_tomorrow_schedule
 from app.src.days import get_schedule_for_this_week

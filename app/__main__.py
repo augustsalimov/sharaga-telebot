@@ -20,6 +20,8 @@ COMMAND_HANDLERS = {
     "this_week": handlers.this_week,
     "next_week": handlers.next_week,
     "whole_schedule": handlers.whole_schedule,
+    "user_of_day": handlers.user_of_day,
+    "user_stat": handlers.user_stat,
     "mqu": handlers.mqu,
     "russia": handlers.russia,
     "recipe": handlers.recipe,
