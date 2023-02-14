@@ -30,14 +30,12 @@ async def send_document(
     document: io.TextIOWrapper | None = None,
     keyboard: InlineKeyboardMarkup | None = None,
 ) -> None:
-    
     if text is not None:
         await send_text(
             update,
             context,
             text,
         )
-
     args = {
         "chat_id": _get_chat_id(update),
         "document": document
@@ -56,6 +54,7 @@ async def get_chat_member(
         chat_id=_get_chat_id(update),
         user_id=user_id,
     )
+
     return f"@{user.user.username}"
 
 
@@ -66,6 +65,7 @@ async def group(
     chat_members_count = await context.bot.get_chat_member_count(
         chat_id=_get_chat_id(update),
     )
+
     return True if chat_members_count > 2 else False
 
 
@@ -73,10 +73,11 @@ async def only_groups_text(
     update: Update, 
     context: ContextTypes.DEFAULT_TYPE
 ) -> None:
+
     await send_text(
         update,
         context,
-        'Комманда доступна только в общих чатах',
+        "Комманда доступна только в общих чатах",
     )
 
 
