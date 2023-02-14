@@ -31,6 +31,15 @@ def next_sunday_date() -> str:
     return _typer(_timenow() + timedelta(days=days_to_the_next_sunday))
 
 
+def first_day_of_month() -> str:
+    return _typer(_timenow().replace(day=1))
+
+
+def last_day_of_month() -> str:
+    next_month = _timenow().replace(day=28) + timedelta(days=4)
+    return _typer(next_month - timedelta(days=next_month.day))
+
+
 def _weekday() -> str:
     return _timenow().weekday() + 1
 

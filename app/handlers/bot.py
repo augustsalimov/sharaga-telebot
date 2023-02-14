@@ -1,5 +1,5 @@
-from typing import cast
 import io
+from typing import cast
 
 import telegram
 from telegram import Chat, InlineKeyboardMarkup, Update
@@ -30,14 +30,12 @@ async def send_document(
     document: io.TextIOWrapper | None = None,
     keyboard: InlineKeyboardMarkup | None = None,
 ) -> None:
-    
     if text is not None:
         await send_text(
             update,
             context,
-            text
+            text,
         )
-
     args = {
         "chat_id": _get_chat_id(update),
         "document": document
@@ -45,6 +43,42 @@ async def send_document(
     if keyboard: args["reply_markup"] = keyboard
     
     await context.bot.send_document(**args)
+
+
+async def get_chat_member(
+    update: Update,
+    context: ContextTypes.DEFAULT_TYPE,
+    user_id: int,
+) -> telegram.ChatMember:
+    user = await context.bot.get_chat_member(
+        chat_id=_get_chat_id(update),
+        user_id=user_id,
+    )
+
+    return f"@{user.user.username}"
+
+
+async def group(
+    update: Update, 
+    context: ContextTypes.DEFAULT_TYPE
+) -> bool:
+    chat_members_count = await context.bot.get_chat_member_count(
+        chat_id=_get_chat_id(update),
+    )
+
+    return True if chat_members_count > 2 else False
+
+
+async def only_groups_text(
+    update: Update, 
+    context: ContextTypes.DEFAULT_TYPE
+) -> None:
+
+    await send_text(
+        update,
+        context,
+        "Комманда доступна только в общих чатах",
+    )
 
 
 def _get_chat_id(update: Update) -> int:

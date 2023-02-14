@@ -16,13 +16,14 @@ async def get_db() -> aiosqlite.Connection:
 
 
 async def fetch_all(
-    sql: str, params: Iterable[Any] = None
+    sql: str, params: Iterable[Any] | None = None
 ) -> list[dict]:
     cursor = await _get_cursor(sql, params)
     rows = await cursor.fetchall()
     results = []
     for row_ in rows: results.append(_get_result_with_column_names(cursor, row_))
     await cursor.close()
+
     return results
 
 
@@ -51,6 +52,7 @@ async def _get_cursor(
     args: tuple[str, Iterable[Any] | None] = (sql, params)
     cursor = await db.execute(*args)
     db.row_factory = aiosqlite.Row
+
     return cursor
 
 
@@ -59,4 +61,5 @@ def _get_result_with_column_names(cursor: aiosqlite.Cursor, row: aiosqlite.Row) 
     resulting_row = {}
     for index, column_name in enumerate(column_names):
         resulting_row[column_name] = row[index]
+        
     return resulting_row

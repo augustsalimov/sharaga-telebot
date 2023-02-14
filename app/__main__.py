@@ -13,16 +13,17 @@ COMMAND_HANDLERS = {
     "start": handlers.start,
     "commands": handlers.commands,
     "version": handlers.version,
-    "links": handlers.links,
-    "contacts": handlers.contacts,
     "today": handlers.today,
     "tomorrow": handlers.tommorow,
     "this_week": handlers.this_week,
     "next_week": handlers.next_week,
-    "whole_schedule": handlers.whole_schedule,
+    "full_schedule": handlers.full_schedule,
+    "links": handlers.links,
+    "contacts": handlers.contacts,
+    "user_of_day": handlers.user_of_day,
+    "user_stat": handlers.user_stat,
     "mqu": handlers.mqu,
     "russia": handlers.russia,
-    "recipe": handlers.recipe,
 }
 
 

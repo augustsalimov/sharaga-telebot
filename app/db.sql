@@ -22,6 +22,23 @@ create table day (
   foreign key(subject_id) references subject(id)
 );
 
+create table users (
+  id integer primary key,
+  user_id text unique
+);
+
+create table month (
+  id integer primary key,
+  my_date date not null unique,
+  user integer,
+  foreign key(user) references users(id)
+);
+
+create table phrases (
+  id integer primary key,
+  phrase integer
+);
+
 insert into lecturer (name, e_mail) values 
   ('Миловзоров Д.Е.', 'milovzorovde@stud.rosnou.ru'),
   ('Кокорина Е.А.', 'kokorinaea@stud.rosnou.ru'),
@@ -64,3 +81,27 @@ insert into day (my_date, l_s, cab, lecturer_id, subject_id) values
   ('2023-03-22', 'ПЗ', '', 2, 2),
   ('2023-03-23', 'Л', '', 6, 6),
   ('2023-03-24', 'Л', '', 6, 7);
+
+insert into users (user_id) values
+  ('447558263'),
+  ('589766009'),
+  ('400238356'),
+  ('1099752474'),
+  ('1750929046'),
+  ('1352913657'),
+  ('369759835'),
+  ('1736745783');
+
+insert into phrases (phrase) values 
+  ("Woop-woop! That's the sound of da pidor-police!;Выезжаю на место..."),
+  ("Тысяча чертей!;Кто бы мог подумать, но"),
+  ("Выберем счастливчика"),
+  ("### RUNNING 'TYPIDOR.SH'..."),
+  ("Зачем вы меня разбудили...;Выезжаю на место...;Не может быть!"),
+  ("Опять в эти ваши игрульки играете?;Ну ладно..."),
+  ("Так, так;Что у нас по пидорам?"),
+  ("Булулулулулуллу"),
+  ("Рубрика, которая нам всем сейчас так нужна"),
+  ("Сканирую...;КЕК"),
+  ("FUCKING SLAVE"),
+  ("300 bucks;и");
