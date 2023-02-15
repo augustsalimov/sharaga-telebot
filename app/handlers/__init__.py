@@ -10,7 +10,7 @@ from .command.info import links
 from .command.info import contacts
 from .command.user import user_of_day
 from .command.user import user_stat
-from .message.messages import phrases
+from .message.messages import main
 
 __all__ = [
     "start",
@@ -25,5 +25,5 @@ __all__ = [
     "contacts",
     "user_of_day",
     "user_stat",
-    "phrases",
+    "main",
 ]

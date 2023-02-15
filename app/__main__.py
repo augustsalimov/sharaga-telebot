@@ -46,7 +46,7 @@ def main():
     application.add_handler(
         MessageHandler(
             filters.TEXT  & (~filters.Sticker.ALL & ~filters.COMMAND), 
-            handlers.phrases
+            handlers.main
         )
     )
 
