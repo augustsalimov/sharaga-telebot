@@ -75,6 +75,17 @@ async def get_chat_member(
     return user.user
 
 
+async def get_chat_members(
+    update: Update,
+    context: ContextTypes.DEFAULT_TYPE,
+) -> telegram.ChatMember:
+    chat = await context.bot.get_chat(
+        chat_id=_get_chat_id(update),
+    )
+    print(chat)
+    return chat
+
+
 async def is_group(
     update: Update, 
     context: ContextTypes.DEFAULT_TYPE,
