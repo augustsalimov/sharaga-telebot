@@ -3,40 +3,16 @@ from telegram import Update
 from telegram import error
 from telegram.ext import ContextTypes
 
-from app.handlers.bot import send_text, get_chat_member, group, only_groups_text
-from app.src.users import get_all_users, get_todays_user, write_todays_user
-from app.src.users import get_champions, get_quantity
-from app.src.phrases import get_all_phrases
+from app.handlers.bot import send_text, get_chat_member
+from app.handlers.bot import is_required_group, only_required_group_text
+from app.src.db_users import get_all_users, get_todays_user, write_todays_user
+from app.src.db_users import get_champions, get_quantity
+from app.src.db_phrases import get_all_phrases
 from app.templates import render_template
 
 
-async def mqu(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if await group(update, context):
-        template = [
-            "Нихуя себе",
-            "У нас есть бот",
-            "Я обожаю наш вуз!!!",
-            "МГУ сосатб!!!",
-        ]
-
-        for phrase in template:
-            await send_text(update, context, response=phrase)
-    else:
-        await only_groups_text(update, context)
-
-
-async def russia(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if await group(update, context):
-        template = "РА СИ Я!!!"
-        
-        for i in range(4):
-            await send_text(update, context, response=template)
-    else:
-        await only_groups_text(update, context)
-
-
-async def user_of_day(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if await group(update, context):
+async def user_of_day(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    if await is_required_group(update):
         try:
             list(await get_todays_user())[0]
             await send_text(
@@ -55,7 +31,6 @@ async def user_of_day(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 user = await get_chat_member(update, context, user_id)
 
                 await write_todays_user(id)
-                template = "user_of_day.j2"
 
                 if not update.message: return
 
@@ -68,13 +43,15 @@ async def user_of_day(update: Update, context: ContextTypes.DEFAULT_TYPE):
                         phrase
                     )
 
+                if user.username is None:
+                    user_name = f"<a href='tg://user?id={user_id}'>{user.first_name}</a>"
+                else:
+                    user_name = f"@{user.username}"
+
                 await send_text(
                     update,
                     context,
-                    render_template(
-                        template,
-                        {"user": user},
-                    ),
+                    f"{user_name} пиdор дня"
                 )
             except error.BadRequest:
                 await send_text(
@@ -83,11 +60,11 @@ async def user_of_day(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     "Пользователь не найден",
                 )
     else:
-        await only_groups_text(update, context)
+        await only_required_group_text(update, context)
 
 
-async def user_stat(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if await group(update, context):
+async def user_stat(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    if await is_required_group(update):
         template = "champions.j2"
 
         list_of_champions = list(await get_champions())
@@ -117,4 +94,4 @@ async def user_stat(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     ),
                 )
     else:
-        await only_groups_text(update, context)
+        await only_required_group_text(update, context)
