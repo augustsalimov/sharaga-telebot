@@ -5,6 +5,8 @@ import telegram
 from telegram import Chat, InlineKeyboardMarkup, Update
 from telegram.ext import ContextTypes
 
+from app.config import CHAT_ID
+
 
 async def send_text(
     update: Update,
@@ -45,6 +47,21 @@ async def send_document(
     await context.bot.send_document(**args)
 
 
+async def send_sticker(
+    update: Update,
+    context: ContextTypes.DEFAULT_TYPE,
+    sticker_id: str,
+    keyboard: InlineKeyboardMarkup | None = None,
+) -> None:
+    args = {
+        "chat_id": _get_chat_id(update),
+        "sticker": sticker_id,
+    }
+    if keyboard: args["reply_markup"] = keyboard
+    
+    await context.bot.send_sticker(**args)
+
+
 async def get_chat_member(
     update: Update,
     context: ContextTypes.DEFAULT_TYPE,
@@ -55,12 +72,12 @@ async def get_chat_member(
         user_id=user_id,
     )
 
-    return f"@{user.user.username}"
+    return user.user
 
 
-async def group(
+async def is_group(
     update: Update, 
-    context: ContextTypes.DEFAULT_TYPE
+    context: ContextTypes.DEFAULT_TYPE,
 ) -> bool:
     chat_members_count = await context.bot.get_chat_member_count(
         chat_id=_get_chat_id(update),
@@ -69,7 +86,12 @@ async def group(
     return True if chat_members_count > 2 else False
 
 
-async def only_groups_text(
+async def is_required_group(update: Update,) -> bool:
+    
+    return True if str(_get_chat_id(update)) == CHAT_ID else False
+
+
+async def only_required_group_text(
     update: Update, 
     context: ContextTypes.DEFAULT_TYPE
 ) -> None:
@@ -77,7 +99,7 @@ async def only_groups_text(
     await send_text(
         update,
         context,
-        "Комманда доступна только в общих чатах",
+        "Данная комманда доступна только в чате 425 группы",
     )
 
 

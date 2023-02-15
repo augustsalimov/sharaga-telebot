@@ -1,31 +1,29 @@
-from .base import start
-from .base import commands
-from .base import version
-from .links import links
-from .contacts import contacts
-from .schedule import today
-from .schedule import tommorow
-from .schedule import this_week
-from .schedule import next_week
-from .schedule import full_schedule
-from .mems import user_of_day
-from .mems import user_stat
-from .mems import mqu
-from .mems import russia
+from .command.base import start
+from .command.base import commands
+from .command.base import version
+from .command.schedule import today
+from .command.schedule import tommorow
+from .command.schedule import this_week
+from .command.schedule import next_week
+from .command.schedule import full_schedule
+from .command.info import links
+from .command.info import contacts
+from .command.user import user_of_day
+from .command.user import user_stat
+from .message.messages import phrases
 
 __all__ = [
     "start",
     "commands",
     "version",
-    "links",
-    "contacts",
     "today",
     "tommorow",
     "this_week",
     "next_week",
     "full_schedule",
+    "links",
+    "contacts",
     "user_of_day",
     "user_stat",
-    "mqu",
-    "russia",
+    "phrases",
 ]

@@ -3,6 +3,8 @@ import logging
 from telegram.ext import (
     ApplicationBuilder,
     CommandHandler,
+    MessageHandler,
+    filters,
 )
 
 from app import config, handlers
@@ -22,8 +24,6 @@ COMMAND_HANDLERS = {
     "contacts": handlers.contacts,
     "user_of_day": handlers.user_of_day,
     "user_stat": handlers.user_stat,
-    "mqu": handlers.mqu,
-    "russia": handlers.russia,
 }
 
 
@@ -42,6 +42,13 @@ def main():
 
     for command_name, command_handler in COMMAND_HANDLERS.items():
         application.add_handler(CommandHandler(command_name, command_handler))
+
+    application.add_handler(
+        MessageHandler(
+            filters.TEXT  & (~filters.Sticker.ALL & ~filters.COMMAND), 
+            handlers.phrases
+        )
+    )
 
     application.run_polling()
 
