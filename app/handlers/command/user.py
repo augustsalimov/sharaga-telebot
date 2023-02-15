@@ -28,7 +28,11 @@ async def user_of_day(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
             id = user.id
             user_id = user.user_id
             try:
-                user = await get_chat_member(update, context, user_id)
+                user_name = await get_chat_member(update, context, user_id)
+                if user.username is None:
+                    user_name = f"<a href='tg://user?id={user_id}'>{user.first_name}</a>"
+                else:
+                    user_name = f"@{user.username}"
 
                 await write_todays_user(id)
 
@@ -42,11 +46,6 @@ async def user_of_day(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
                         context,
                         phrase
                     )
-
-                if user.username is None:
-                    user_name = f"<a href='tg://user?id={user_id}'>{user.first_name}</a>"
-                else:
-                    user_name = f"@{user.username}"
 
                 await send_text(
                     update,
@@ -79,9 +78,11 @@ async def user_stat(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             out_list = []
             for i, champion in enumerate(list_of_champions, start=1):
                 user_id = champion.user_id
+                user = await get_chat_member(update, context, user_id)
+
                 out_list.append((
                     i, 
-                    await get_chat_member(update, context, user_id), 
+                    user.first_name, 
                     await get_quantity(user_id)
                 ))
 

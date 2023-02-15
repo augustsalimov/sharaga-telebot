@@ -87,8 +87,8 @@ async def is_group(
 
 
 async def is_required_group(update: Update,) -> bool:
-    
-    return True if str(_get_chat_id(update)) == CHAT_ID else False
+
+    return True if str(_get_chat_id(update)) == str(CHAT_ID) else False
 
 
 async def only_required_group_text(
