@@ -58,7 +58,7 @@ async def get_champions() -> Iterable[UserDay]:
         WHERE my_date >= "{mydatetime.first_day_of_month()}" 
         and my_date <= "{mydatetime.last_day_of_month()}" 
         GROUP BY user_id
-        ORDER BY user_id DESC
+        ORDER BY COUNT(user_id) DESC
         LIMIT 10 
     """
     user = await _get_user_days_from_db(sql)

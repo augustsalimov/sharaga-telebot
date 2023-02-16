@@ -18,8 +18,12 @@ async def main(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     try:
         dict_[str(message.from_user.id)]
     except Exception:
+        try:
+            username = message.from_user.username
+        except:
+            username = "None"
         dict_[str(message.from_user.id)] = {
-            "Username": message.from_user.username, 
+            "Username": username, 
             "First name": message.from_user.first_name
         }
         with open(path, 'w') as f:
