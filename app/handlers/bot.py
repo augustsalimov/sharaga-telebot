@@ -82,7 +82,7 @@ async def get_chat_members(
     chat = await context.bot.get_chat(
         chat_id=_get_chat_id(update),
     )
-    print(chat)
+
     return chat
 
 
@@ -93,7 +93,7 @@ async def is_group(
     chat_members_count = await context.bot.get_chat_member_count(
         chat_id=_get_chat_id(update),
     )
-
+    
     return True if chat_members_count > 2 else False
 
 
@@ -115,4 +115,5 @@ async def only_required_group_text(
 
 
 def _get_chat_id(update: Update) -> int:
+
     return cast(Chat, update.effective_chat).id

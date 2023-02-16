@@ -34,9 +34,15 @@ create table month (
   foreign key(user) references users(id)
 );
 
+create table user_phrases (
+  id integer primary key,
+  phrase text
+);
+
 create table phrases (
   id integer primary key,
-  phrase integer
+  key_phrase text,
+  phrase text
 );
 
 insert into lecturer (name, e_mail) values 
@@ -94,7 +100,7 @@ insert into month (my_date, user) values
   ('2023-02-15', 5),
   ('2023-02-16', 7);
 
-insert into phrases (phrase) values 
+insert into user_phrases (phrase) values 
   ("Woop-woop! That's the sound of da pidor-police!;Выезжаю на место..."),
   ("Тысяча чертей!;Кто бы мог подумать, но"),
   ("Выберем счастливчика"),
@@ -107,3 +113,33 @@ insert into phrases (phrase) values
   ("Сканирую...;КЕК"),
   ("FUCKING SLAVE"),
   ("300 bucks;и");
+
+insert into phrases (key_phrase, phrase) values 
+  ("РОССИЯ", "РА СИ Я!"),
+  ("Russia", "РА СИ Я!"),
+  ("Россия", "РА СИ Я!"),
+  ("РА СИ Я", "РА СИ Я!"),
+  ("мгу", "МГУ СОСАТБ!"),
+  ("МГУ", "МГУ СОСАТБ!"),
+  ("МГУ СОСАТЬ", "МГУ СОСАТБ!"),
+  ("мгу сосать", "МГУ СОСАТБ!"),
+  ("нужен гол", "НУЖНО ДВА;НУЖЕН КУБОК УЕФА!"),
+  ("8", "800;555;3535;лучше позвонить, чем у кого-то занимать"),
+  ("что делать", "Муравью хуй приделать"),
+  ("опоздаю", "Если никуда не ходить, то и не опоздаешь"),
+  ("кто где", "Всегда мысленно с тобой"),
+  ("расия", "Россия пишется с большой буквы;неуч..."),
+  ("россия", "Россия пишется с большой буквы;неуч..."),
+  ("бот, ты жив?", "Живее всех живых"),
+  ("бот ты жив?", "Живее всех живых"),
+  ("пинг", "понг"),
+  ("динг", "донг"),
+  ("и чо", "хуй в оче"),
+  ("и че", "хуй в оче"),
+  ("а как", "Гугл украли?"),
+  ("обижаешь", "Хорошего человека и обидеть приятно"),
+  ("заело", "Гав-гав"),
+  ("рецепт", "CAACAgIAAxkBAAIEb2PsnAk73h_fWcMDBRhNaMyONVIyAAIPJgACLLcgS3pH8IACDH8-LgQ"),
+  ("сижу", "CAACAgIAAxkBAAIEWGPsjBKjYVTBvcuYLuwG_lRuSgJpAAJQKwACrhkQSzfd4v8zMHNjLgQ"),
+  ("хач", "CAACAgIAAxkBAAIEbGPsmjrvbsLhpNSBlmOhVj97d03YAAJRKgACNSYhSwdD9VCnilA3LgQ"),
+  ("чурка", "CAACAgIAAxkBAAIEbGPsmjrvbsLhpNSBlmOhVj97d03YAAJRKgACNSYhSwdD9VCnilA3LgQ");

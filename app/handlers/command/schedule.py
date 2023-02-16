@@ -1,6 +1,7 @@
 from telegram import Update
 from telegram.ext import ContextTypes
 
+from app.config import FILES_DIR
 from app.handlers.bot import send_text, send_document
 from app.src.db_days import get_today_schedule
 from app.src.db_days import get_tomorrow_schedule
@@ -85,7 +86,7 @@ async def next_week(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
 
 async def full_schedule(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    document = open("app/files/schedule.pdf", "rb")
+    document = open(f"{FILES_DIR}/schedule.pdf", "rb")
 
     if not update.message: return
     await send_document(

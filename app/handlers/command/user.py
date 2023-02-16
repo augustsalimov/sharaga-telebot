@@ -66,32 +66,39 @@ async def user_stat(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     if await is_required_group(update):
         template = "champions.j2"
 
-        list_of_champions = list(await get_champions())
-        if list_of_champions == []:
+        try:
+            list_of_champions = list(await get_champions())
+            if list_of_champions == []:
+                await send_text(
+                    update,
+                    context,
+                    "Пока статистика пуста"
+                )
+                return
+            else:
+                out_list = []
+                for i, champion in enumerate(list_of_champions, start=1):
+                    user_id = champion.user_id
+                    user = await get_chat_member(update, context, user_id)
+
+                    out_list.append((
+                        i, 
+                        user.first_name, 
+                        await get_quantity(user_id)
+                    ))
+                await send_text(
+                        update,
+                        context,
+                        render_template(
+                            template,
+                            {"champions": out_list},
+                        ),
+                    )
+        except error.BadRequest:
             await send_text(
                 update,
                 context,
-                "Пока статистика пуста"
+                "Пользователь не найден"
             )
-            return
-        else:
-            out_list = []
-            for i, champion in enumerate(list_of_champions, start=1):
-                user_id = champion.user_id
-                user = await get_chat_member(update, context, user_id)
-
-                out_list.append((
-                    i, 
-                    user.first_name, 
-                    await get_quantity(user_id)
-                ))
-            await send_text(
-                    update,
-                    context,
-                    render_template(
-                        template,
-                        {"champions": out_list},
-                    ),
-                )
     else:
         await only_required_group_text(update, context)
