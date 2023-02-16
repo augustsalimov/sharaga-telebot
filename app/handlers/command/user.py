@@ -28,7 +28,7 @@ async def user_of_day(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
             id = user.id
             user_id = user.user_id
             try:
-                user_name = await get_chat_member(update, context, user_id)
+                user = await get_chat_member(update, context, user_id)
                 if user.username is None:
                     user_name = f"<a href='tg://user?id={user_id}'>{user.first_name}</a>"
                 else:
@@ -85,7 +85,6 @@ async def user_stat(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                     user.first_name, 
                     await get_quantity(user_id)
                 ))
-
             await send_text(
                     update,
                     context,
