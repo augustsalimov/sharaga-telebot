@@ -1,7 +1,7 @@
 # SharagaNouBOT
-[![status](https://img.shields.io/badge/status-active-success.svg?style=flat-square)]()<br>
+[![status](https://img.shields.io/badge/status-active-success.svg?style=flat-square)]() 
 [![last commit](https://img.shields.io/github/last-commit/augustsalimov/sharaga-telebot?style=flat-square)](https://github.com/augustsalimov/sharaga-telebot/commits/develop)<br>
-[![issues](https://img.shields.io/github/issues/augustsalimov/sharaga-telebot?style=flat-square)](https://github.com/augustsalimov/sharaga-telebot/issues)<br>
+[![issues](https://img.shields.io/github/issues/augustsalimov/sharaga-telebot?style=flat-square)](https://github.com/augustsalimov/sharaga-telebot/issues) 
 [![pull requests](https://img.shields.io/github/issues-pr/augustsalimov/sharaga-telebot?style=flat-square)](https://github.com/augustsalimov/sharaga-telebot/pulls)<br>
 This is repo of python scripted telegram bot for local university group. Main purpose is to provide students with schedule, links and contacts. Also it has some other features like answering to messages.
 
@@ -16,17 +16,17 @@ This is repo of python scripted telegram bot for local university group. Main pu
 Python 3.11, python-telegram-bot, sqlite, jinja2.<br>
 
 ## Commands <a name="commands"></a>
-- /start - welcome message
-- /commands - commands
-- /today - today's classes
-- /tomorrow - tomorrow's classes
-- /this_week - schedule for this week
-- /next_week - schedule for next week
-- /full_schedule - file with full schedule
-- /links - all important links
-- /contacts - contacts
-- /user_of_day - user of the day
-- /user_stat - statistics<br>
+- `/start` - welcome message
+- `/commands` - commands
+- `/today` - today's classes
+- `/tomorrow` - tomorrow's classes
+- `/this_week` - schedule for this week
+- `/next_week` - schedule for next week
+- `/full_schedule` - file with full schedule
+- `/links` - all important links
+- `/contacts` - contacts
+- `/user_of_day` - user of the day
+- `/user_stat` - statistics<br>
 
 ## Getting Started <a name="getting_started"></a>
 These instructions will get you a copy of the project up and running on your local machine for development 
@@ -45,7 +45,7 @@ sudo ./init.sh
 sudo ./db.sh
 ```
 Fill in `.env` file.<br>
-Fill db with data.<br>s
+Fill db with data.<br>
 
 ### Running
 Now you can run it with `poetry run python -m app` command.
