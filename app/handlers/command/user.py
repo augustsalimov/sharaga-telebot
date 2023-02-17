@@ -5,7 +5,7 @@ from telegram.ext import ContextTypes
 
 from app.handlers.bot import send_text, get_chat_member
 from app.handlers.bot import is_required_group, only_required_group_text
-from app.src.db_users import get_all_users, get_todays_user, write_todays_user
+from app.src.db_users import get_users, get_todays_user, write_todays_user
 from app.src.db_users import get_champions, get_quantity
 from app.src.db_phrases import get_all_phrases
 from app.templates import render_template
@@ -22,7 +22,7 @@ async def user_of_day(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
             )
 
         except IndexError:
-            users = list(await get_all_users())
+            users = list(await get_users())
             
             user = secrets.choice(users)
             id = user.id
