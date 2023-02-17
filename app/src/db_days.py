@@ -71,7 +71,7 @@ async def _get_days_from_db(sql: str) -> Iterable[Day]:
     return [
         Day(
             id = day["id"],
-            date = day["my_date"],
+            date = '-'.join(day["my_date"].split('-')[::-1]),
             l_s = day["l_s"],
             cab = day["cab"],
             lecturer_name = day["lecturer_name"],
