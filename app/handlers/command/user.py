@@ -1,4 +1,5 @@
 import secrets
+
 from telegram import Update
 from telegram import error
 from telegram.ext import ContextTypes
@@ -20,7 +21,7 @@ async def user_of_day(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
                 context,
                 "Сегодня выбор уже сделан"
             )
-
+            return
         except IndexError:
             users = list(await get_users())
             
@@ -41,25 +42,20 @@ async def user_of_day(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
                 phrases = secrets.choice(list(await get_all_phrases()))
                 phrases = phrases.phrase.split(";")
                 for phrase in phrases:
-                    await send_text(
-                        update,
-                        context,
-                        phrase
-                    )
+                    await send_text(update, context, phrase)
 
                 await send_text(
                     update,
                     context,
                     f"{user_name} пиdор дня"
                 )
+                return
             except error.BadRequest:
-                await send_text(
-                    update,
-                    context,
-                    "Пользователь не найден",
-                )
+                await send_text(update, context, "Пользователь не найден")
+                return
     else:
         await only_required_group_text(update, context)
+        return
 
 
 async def user_stat(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -94,11 +90,10 @@ async def user_stat(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                             {"champions": out_list},
                         ),
                     )
+                return
         except error.BadRequest:
-            await send_text(
-                update,
-                context,
-                "Пользователь не найден"
-            )
+            await send_text(update, context, "Пользователь не найден")
+            return
     else:
         await only_required_group_text(update, context)
+        return

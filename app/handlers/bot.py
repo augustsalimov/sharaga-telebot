@@ -1,7 +1,7 @@
 import io
-from typing import cast
-
 import telegram
+
+from typing import cast
 from telegram import Chat, InlineKeyboardMarkup, Update
 from telegram.ext import ContextTypes
 
