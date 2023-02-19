@@ -18,6 +18,16 @@ async def get_all_users() -> Iterable[User]:
 
 
 def _all_users_base_sql_request() -> str:
+    return """SELECT * FROM all_users"""
+
+
+async def get_users() -> Iterable[User]:
+    sql = f"""{_users_base_sql_request()}"""
+    days = await _get_users_from_db(sql)
+    return days
+
+
+def _users_base_sql_request() -> str:
     return """SELECT * FROM users"""
 
 

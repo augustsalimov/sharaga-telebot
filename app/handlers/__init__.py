@@ -1,6 +1,5 @@
 from .command.base import start
 from .command.base import commands
-from .command.base import version
 from .command.schedule import today
 from .command.schedule import tommorow
 from .command.schedule import this_week
@@ -15,7 +14,6 @@ from .message.messages import main
 __all__ = [
     "start",
     "commands",
-    "version",
     "today",
     "tommorow",
     "this_week",

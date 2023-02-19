@@ -1,47 +1,65 @@
 # SharagaNouBOT
-Telegram-бот для группы.
+[![status](https://img.shields.io/badge/status-active-success.svg?style=flat-square)](https://github.com/augustsalimov/sharaga-telebot) 
+[![last commit](https://img.shields.io/github/last-commit/augustsalimov/sharaga-telebot?style=flat-square)](https://github.com/augustsalimov/sharaga-telebot/commits/develop)<br>
+[![issues](https://img.shields.io/github/issues/augustsalimov/sharaga-telebot?style=flat-square)](https://github.com/augustsalimov/sharaga-telebot/issues) 
+[![pull requests](https://img.shields.io/github/issues-pr/augustsalimov/sharaga-telebot?style=flat-square)](https://github.com/augustsalimov/sharaga-telebot/pulls)<br>
+This is repo of python scripted telegram bot for local university group. Main purpose is to provide students with schedule, links and contacts. Also it has some other features like answering to messages.
 
-## Инструменты
-- Python 3.11
-- Python-telegram-bot
-- Aiosqlite
-- Jinja2
+## Table of Contents
 
-## Команды
-- /start - приветственное сообщение
-- /commands - комманды
-- /version - версия бота
-- /today - какая сегодня пара
-- /tomorrow - какая завтра пара
-- /this_week - расписание на эту, оставшуюся часть недели
-- /next_week - расписание на следующую неделю 
-- /full_schedule - файл со всем расписанием
-- /links - все важные ссылки
-- /contacts - контакты
-- /user_of_day - пользователь дня
-- /user_stat - статистика за месяц<br>
-<br>
-Еще бот отвечает на разные сообщения.
+- [Tech stack](#stack)
+- [Commands](#commands)
+- [Getting Started](#getting_started)
+- [TODO](#todo)
 
-## Запуск
-Для начала, надо дать права скрипту `chmod +x init.sh` и запустить его `./init.sh`<br>
-Заполнить появившийся `.env` файл<br>
-Залить базу данных `cat app/db.sql | sqlite3 app/db.sqlite3`<br>
-Затем можно запустить бота `poetry run python -m app`<br>
+## Tech stack <a name="stack"></a>
+Python 3.11, python-telegram-bot, sqlite, jinja2.<br>
 
-## Идеи
-/deadlines - ближайшие дедлайны<br>
-Поменять формат вывода даты<br>
-Если сегодня нет пары, то указать ближайшую<br>
-Мемы<br>
-R&D - админка из чата<br>
+## Commands <a name="commands"></a>
+- `/start` - welcome message
+- `/commands` - commands
+- `/today` - today's classes
+- `/tomorrow` - tomorrow's classes
+- `/this_week` - schedule for this week
+- `/next_week` - schedule for next week
+- `/full_schedule` - file with full schedule
+- `/links` - all important links
+- `/contacts` - contacts
+- `/user_of_day` - user of the day
+- `/user_stat` - statistics<br>
 
-## Тех бэклог
-R&D - автоматизировать процесс скачки файла с расписанием<br>
-парсинг файла и запись в бд<br>
+## Getting Started <a name="getting_started"></a>
+These instructions will get you a copy of the project up and running on your local machine for development 
+and testing purposes.<br> 
+NOTE: instructions only for unix-like systems.
+
+### Installing
+
+First of all, install python 3.11 and sqlite3.<br>
+Then clone this git repository `git clone git@github.com:augustsalimov/sharaga-telebot.git`.<br>
+Give permissions to the bash scripts and run them.
+```
+chmod +x init.sh
+chmod +x db.sh
+sudo ./init.sh
+sudo ./db.sh
+```
+Fill in `.env` file.<br>
+Fill db with data.<br>
+
+### Running
+Now you can run it with `poetry run python -m app` command.
+
+## TODO <a name="todo"></a>
+/deadlines<br>
+Next class if there are no class today<br>
+Memes<br>
+code refactoring<br><br>
+R&D - automate proccess of downloading schedule file<br>
+script for parsing of the file and writing it to the db<br>
 maintenance mode<br>
-докер<br>
+docker<br>
 ci/cd<br>
-тесты<br>
+tests<br>
 pre-commit<br>
-на серваке перейти со screen-а на systemd-юнит<br>
+systemd-unit<br>
