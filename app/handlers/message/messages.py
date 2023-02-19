@@ -19,7 +19,8 @@ async def main(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     if "пиздюк" in lower_text:
         if user_id == ADMIN_USER_ID:
             await admin(update, context, lower_text.split("пиздюк")[1])
-        await send_text(update, context, "От пиздюка слышу")
+        else:
+            await send_text(update, context, "От пиздюка слышу")
         return
 
     if "пар" in lower_text:
