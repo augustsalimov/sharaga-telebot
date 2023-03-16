@@ -51,7 +51,7 @@ async def user_of_day(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
                 user_stat(update, context)
                 return
             except error.BadRequest as e:
-                logger.error(e)
+                logger.error(f"{e} - {user} - {id} - {user_id}")
                 await send_text(update, context, "Пользователь не найден")
                 return
     else:

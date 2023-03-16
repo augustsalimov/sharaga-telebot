@@ -26,7 +26,6 @@ COMMAND_HANDLERS = {
 
 
 if not bot_settings.TELEGRAM_BOT_TOKEN:
-    # or not bot_settings.TELEGRAM_BOT_CHANNEL_ID:
     raise ValueError("env variables wasn't implemented")
 
 
