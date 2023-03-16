@@ -1,8 +1,8 @@
 from collections.abc import Iterable
 from dataclasses import dataclass
 
-from app.db_model import fetch_all
-from app.src import mydatetime
+from db_model import fetch_all
+from services import mydatetime
 
 
 @dataclass
@@ -60,7 +60,7 @@ def _days_base_sql_request() -> str:
             d.cab as cab,
             l.name as lecturer_name,
             s.name as subject_name
-        FROM day d
+        FROM schedule d
         LEFT JOIN lecturer l ON d.lecturer_id  = l.id
         RIGHT JOIN subject s ON d.subject_id  = s.id
     """
@@ -70,12 +70,12 @@ async def _get_days_from_db(sql: str) -> Iterable[Day]:
     day_raw = await fetch_all(sql)
     return [
         Day(
-            id = day["id"],
-            date = '-'.join(day["my_date"].split('-')[::-1]),
-            l_s = day["l_s"],
-            cab = day["cab"],
-            lecturer_name = day["lecturer_name"],
-            subject_name = day["subject_name"]
+            id=day["id"],
+            date="-".join(day["my_date"].split("-")[::-1]),
+            l_s=day["l_s"],
+            cab=day["cab"],
+            lecturer_name=day["lecturer_name"],
+            subject_name=day["subject_name"],
         )
         for day in day_raw
     ]

@@ -1,13 +1,14 @@
 from telegram import Update
 from telegram.ext import ContextTypes
 
-from app.config import FILES_DIR
-from app.handlers.bot import send_text, send_document
-from app.src.db_days import get_today_schedule
-from app.src.db_days import get_tomorrow_schedule
-from app.src.db_days import get_schedule_for_this_week
-from app.src.db_days import get_schedule_for_next_week
-from app.templates import render_template
+from core import FILES_DIR, render_template
+from handlers.bot import send_text, send_document
+from services.db_days import (
+    get_today_schedule,
+    get_tomorrow_schedule,
+    get_schedule_for_this_week,
+    get_schedule_for_next_week,
+)
 
 
 SINGLE_LESSON_TEMPLATE = "single.j2"
@@ -20,11 +21,12 @@ NEXT_WEEK_VACATIONS_TEMPLATE = "next_week_vacations.j2"
 async def today(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     template = SINGLE_LESSON_TEMPLATE
     today_lesson = await get_today_schedule()
-    if today_lesson is None: 
+    if today_lesson is None:
         template = SINGLE_VACATION_TEMPLATE
         today_lesson = "Сегодня"
 
-    if not update.message: return
+    if not update.message:
+        return
     await send_text(
         update,
         context,
@@ -38,11 +40,12 @@ async def today(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 async def tommorow(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     template = SINGLE_LESSON_TEMPLATE
     tomorrow_lesson = await get_tomorrow_schedule()
-    if tomorrow_lesson is None: 
+    if tomorrow_lesson is None:
         template = SINGLE_VACATION_TEMPLATE
         tomorrow_lesson = "Завтра"
-    
-    if not update.message: return
+
+    if not update.message:
+        return
     await send_text(
         update,
         context,
@@ -56,9 +59,11 @@ async def tommorow(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 async def this_week(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     template = SCHEDULE_TEMPLATE
     this_week_lessons = list(await get_schedule_for_this_week())
-    if this_week_lessons == []: template = THIS_WEEK_VACATIONS_TEMPLATE
-    
-    if not update.message: return
+    if this_week_lessons == []:
+        template = THIS_WEEK_VACATIONS_TEMPLATE
+
+    if not update.message:
+        return
     await send_text(
         update,
         context,
@@ -72,9 +77,11 @@ async def this_week(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 async def next_week(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     template = SCHEDULE_TEMPLATE
     next_week_lessons = list(await get_schedule_for_next_week())
-    if next_week_lessons == []: template = NEXT_WEEK_VACATIONS_TEMPLATE
-    
-    if not update.message: return
+    if next_week_lessons == []:
+        template = NEXT_WEEK_VACATIONS_TEMPLATE
+
+    if not update.message:
+        return
     await send_text(
         update,
         context,
@@ -88,10 +95,6 @@ async def next_week(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 async def full_schedule(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     document = open(f"{FILES_DIR}/schedule.pdf", "rb")
 
-    if not update.message: return
-    await send_document(
-        update,
-        context,
-        "Расписание на весь семестр",
-        document
-    )
+    if not update.message:
+        return
+    await send_document(update, context, "Расписание на весь семестр", document)

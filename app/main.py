@@ -1,5 +1,3 @@
-import logging
-
 from telegram.ext import (
     ApplicationBuilder,
     CommandHandler,
@@ -7,8 +5,9 @@ from telegram.ext import (
     filters,
 )
 
-from app import config, handlers
-from app.db_model import close_db
+import handlers
+from core import bot_settings, logger
+from db_model import close_db
 
 
 COMMAND_HANDLERS = {
@@ -26,26 +25,19 @@ COMMAND_HANDLERS = {
 }
 
 
-logging.basicConfig(
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO
-)
-logger = logging.getLogger(__name__)
-
-
-if not config.TELEGRAM_BOT_TOKEN: # or not config.TELEGRAM_BOT_CHANNEL_ID:
+if not bot_settings.TELEGRAM_BOT_TOKEN:
     raise ValueError("env variables wasn't implemented")
 
 
-def main():
-    application = ApplicationBuilder().token(config.TELEGRAM_BOT_TOKEN).build()
+def main() -> None:
+    application = ApplicationBuilder().token(bot_settings.TELEGRAM_BOT_TOKEN).build()
 
     for command_name, command_handler in COMMAND_HANDLERS.items():
         application.add_handler(CommandHandler(command_name, command_handler))
 
     application.add_handler(
         MessageHandler(
-            filters.TEXT  & (~filters.Sticker.ALL & ~filters.COMMAND), 
-            handlers.main
+            filters.TEXT & (~filters.Sticker.ALL & ~filters.COMMAND), handlers.main
         )
     )
 

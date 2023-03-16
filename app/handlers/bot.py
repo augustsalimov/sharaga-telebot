@@ -1,11 +1,10 @@
 import io
 import telegram
-
 from typing import cast
 from telegram import Chat, InlineKeyboardMarkup, Update
 from telegram.ext import ContextTypes
 
-from app.config import CHAT_ID
+from core import bot_settings
 
 
 async def send_text(
@@ -20,8 +19,9 @@ async def send_text(
         "text": response,
         "parse_mode": telegram.constants.ParseMode.HTML,
     }
-    if keyboard: args["reply_markup"] = keyboard
-    
+    if keyboard:
+        args["reply_markup"] = keyboard
+
     await context.bot.send_message(**args)
 
 
@@ -38,12 +38,10 @@ async def send_document(
             context,
             text,
         )
-    args = {
-        "chat_id": _get_chat_id(update),
-        "document": document
-    }
-    if keyboard: args["reply_markup"] = keyboard
-    
+    args = {"chat_id": _get_chat_id(update), "document": document}
+    if keyboard:
+        args["reply_markup"] = keyboard
+
     await context.bot.send_document(**args)
 
 
@@ -57,8 +55,9 @@ async def send_sticker(
         "chat_id": _get_chat_id(update),
         "sticker": sticker_id,
     }
-    if keyboard: args["reply_markup"] = keyboard
-    
+    if keyboard:
+        args["reply_markup"] = keyboard
+
     await context.bot.send_sticker(**args)
 
 
@@ -87,26 +86,25 @@ async def get_chat_members(
 
 
 async def is_group(
-    update: Update, 
+    update: Update,
     context: ContextTypes.DEFAULT_TYPE,
 ) -> bool:
     chat_members_count = await context.bot.get_chat_member_count(
         chat_id=_get_chat_id(update),
     )
-    
+
     return True if chat_members_count > 2 else False
 
 
-async def is_required_group(update: Update,) -> bool:
-
-    return True if str(_get_chat_id(update)) == str(CHAT_ID) else False
+async def is_required_group(
+    update: Update,
+) -> bool:
+    return True if str(_get_chat_id(update)) == str(bot_settings.CHAT_ID) else False
 
 
 async def only_required_group_text(
-    update: Update, 
-    context: ContextTypes.DEFAULT_TYPE
+    update: Update, context: ContextTypes.DEFAULT_TYPE
 ) -> None:
-
     await send_text(
         update,
         context,
@@ -115,5 +113,4 @@ async def only_required_group_text(
 
 
 def _get_chat_id(update: Update) -> int:
-
     return cast(Chat, update.effective_chat).id

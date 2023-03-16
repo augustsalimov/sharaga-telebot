@@ -1,7 +1,7 @@
-import pytz
-
 from datetime import datetime, timedelta
 from collections.abc import Iterable
+
+import pytz
 
 
 def this_week_dates() -> Iterable[str]:
@@ -46,7 +46,7 @@ def _weekday() -> str:
 
 
 def _timenow() -> datetime:
-    return datetime.now(pytz.timezone('Europe/Moscow'))
+    return datetime.now(pytz.timezone("Europe/Moscow"))
 
 
 def _typer(date: datetime) -> str:

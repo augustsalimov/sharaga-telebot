@@ -1,8 +1,6 @@
 # SharagaNouBOT
 [![status](https://img.shields.io/badge/status-active-success.svg?style=flat-square)](https://github.com/augustsalimov/sharaga-telebot) 
 [![last commit](https://img.shields.io/github/last-commit/augustsalimov/sharaga-telebot?style=flat-square)](https://github.com/augustsalimov/sharaga-telebot/commits/develop)<br>
-[![issues](https://img.shields.io/github/issues/augustsalimov/sharaga-telebot?style=flat-square)](https://github.com/augustsalimov/sharaga-telebot/issues) 
-[![pull requests](https://img.shields.io/github/issues-pr/augustsalimov/sharaga-telebot?style=flat-square)](https://github.com/augustsalimov/sharaga-telebot/pulls)<br>
 This is repo of python scripted telegram bot for local university group. Main purpose is to provide students with schedule, links and contacts. Also it has some other features like answering to messages.
 
 ## Table of Contents
@@ -35,7 +33,7 @@ NOTE: instructions only for unix-like systems.
 
 ### Installing
 
-First of all, install python 3.11 and sqlite3.<br>
+First of all, install docker.<br>
 Then clone this git repository `git clone git@github.com:augustsalimov/sharaga-telebot.git`.<br>
 Give permissions to the bash scripts and run them.
 ```
@@ -52,14 +50,12 @@ Now you can run it with `poetry run python -m app` command.
 
 ## TODO <a name="todo"></a>
 /deadlines<br>
+/user bugfix<br>
 Next class if there are no class today<br>
 Memes<br>
 code refactoring<br><br>
 R&D - automate proccess of downloading schedule file<br>
 script for parsing of the file and writing it to the db<br>
 maintenance mode<br>
-docker<br>
 ci/cd<br>
-tests<br>
-pre-commit<br>
-systemd-unit<br>
+systemd<br>

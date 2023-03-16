@@ -11,7 +11,7 @@ create table subject (
   foreign key(lecturer_id) references lecturer(id)
 );
 
-create table day (
+create table schedule (
   id integer primary key,
   my_date date not null unique,
   l_s text,
@@ -32,7 +32,7 @@ create table users (
   user_id text unique
 );
 
-create table month (
+create table statistics (
   id integer primary key,
   my_date date not null unique,
   user integer,

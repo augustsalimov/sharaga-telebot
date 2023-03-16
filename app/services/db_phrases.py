@@ -1,7 +1,7 @@
 from collections.abc import Iterable
 from dataclasses import dataclass
 
-from app.db_model import fetch_all
+from db_model import fetch_all
 
 
 @dataclass
@@ -26,9 +26,7 @@ async def _get_phrases_from_db(sql: str) -> Iterable[Phrase]:
     phrase_raw = await fetch_all(sql)
     return [
         Phrase(
-            id = phrase["id"],
-            key_phrase = phrase["key_phrase"],
-            phrase = phrase["phrase"]
+            id=phrase["id"], key_phrase=phrase["key_phrase"], phrase=phrase["phrase"]
         )
         for phrase in phrase_raw
     ]
@@ -53,9 +51,5 @@ def _user_phrases_base_sql_request() -> str:
 async def _get_user_phrases_from_db(sql: str) -> Iterable[UserPhrases]:
     phrase_raw = await fetch_all(sql)
     return [
-        UserPhrases(
-            id = phrase["id"],
-            phrase = phrase["phrase"]
-        )
-        for phrase in phrase_raw
+        UserPhrases(id=phrase["id"], phrase=phrase["phrase"]) for phrase in phrase_raw
     ]

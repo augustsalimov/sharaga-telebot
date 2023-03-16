@@ -1,8 +1,8 @@
 from telegram import Update
 from telegram.ext import ContextTypes
 
-from app.handlers.bot import send_text
-from app.templates import render_template
+from handlers.bot import send_text
+from core import render_template
 
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
