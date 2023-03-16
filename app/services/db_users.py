@@ -58,7 +58,7 @@ async def get_todays_user() -> Iterable[UserDay]:
 
 async def write_todays_user(id: int) -> Iterable[UserDay]:
     sql = f"""
-        INSERT INTO month (my_date, user) 
+        INSERT INTO statistics (my_date, user) 
         VALUES ("{mydatetime.today()}", {id}) """
     await execute(sql)
 
@@ -78,11 +78,11 @@ async def get_champions() -> Iterable[UserDay]:
 async def get_quantity(user_id: str) -> int:
     sql = f"""
         SELECT
-            m.my_date as my_date,
+            s.my_date as my_date,
             u.user_id as user_id,
             COUNT(u.user_id)
-        FROM month m
-        JOIN users u ON m.user = u.id
+        FROM statistics s
+        JOIN users u ON s.user = u.id
         WHERE user_id = "{user_id}" and my_date >= "{mydatetime.first_day_of_month()}" 
         and my_date <= "{mydatetime.last_day_of_month()}"
     """
@@ -93,11 +93,11 @@ async def get_quantity(user_id: str) -> int:
 def _user_days_base_sql_request() -> str:
     return """
         SELECT
-            m.id as id,
-            m.my_date as my_date,
+            s.id as id,
+            s.my_date as my_date,
             u.user_id as user_id
-        FROM month m
-        JOIN users u ON m.user = u.id
+        FROM statistics s
+        JOIN users u ON s.user = u.id
     """
 
 

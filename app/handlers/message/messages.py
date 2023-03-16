@@ -102,8 +102,10 @@ async def admin(update: Update, context: ContextTypes.DEFAULT_TYPE, text: str) -
             await send_text(update, context, " ".join(i for i in users_list))
         except error.BadRequest:
             await send_text(update, context, "Босс, некоторые пользователи не найдены")
-    elif "я опоздаю" in text:
+    elif "опоздаю" in text:
         await send_text(update, context, "Не спешите, Босс")
+    elif "позоришь" in text:
+        await send_text(update, context, "Извините, Босс")
     else:
         await send_text(update, context, "Да, Босс")
     return
@@ -125,7 +127,6 @@ async def schedule_commands(
         if key in text:
             await val(update, context)
             return
-    await send_text(update, context, "Кто-то сказал пара?")
     return
 
 

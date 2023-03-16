@@ -60,7 +60,7 @@ def _days_base_sql_request() -> str:
             d.cab as cab,
             l.name as lecturer_name,
             s.name as subject_name
-        FROM day d
+        FROM schedule d
         LEFT JOIN lecturer l ON d.lecturer_id  = l.id
         RIGHT JOIN subject s ON d.subject_id  = s.id
     """
