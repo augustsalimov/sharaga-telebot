@@ -4,6 +4,7 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
 RUN apt-get update && apt-get install
+RUN sudo apt-get install -y sqlite3 libsqlite3-dev
 
 RUN mkdir -p /opt/app
 WORKDIR /opt/app

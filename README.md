@@ -33,7 +33,7 @@ NOTE: instructions only for unix-like systems.
 
 ### Installing
 
-First of all, install python 3.11 and sqlite3.<br>
+First of all, install docker.<br>
 Then clone this git repository `git clone git@github.com:augustsalimov/sharaga-telebot.git`.<br>
 Give permissions to the bash scripts and run them.
 ```
@@ -50,14 +50,15 @@ Now you can run it with `poetry run python -m app` command.
 
 ## TODO <a name="todo"></a>
 /deadlines<br>
+/user bugfix<br>
+/user_stat after /user<br>
 Next class if there are no class today<br>
 Memes<br>
 code refactoring<br><br>
 R&D - automate proccess of downloading schedule file<br>
 script for parsing of the file and writing it to the db<br>
 maintenance mode<br>
-docker<br>
 ci/cd<br>
 tests<br>
 pre-commit<br>
-systemd-unit<br>
+systemd<br>
