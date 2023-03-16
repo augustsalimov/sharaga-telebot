@@ -22,10 +22,10 @@ async def _get_lecturers_from_db(sql: str) -> Iterable[Lecturer]:
     lecturers_raw = await fetch_all(sql)
     return [
         Lecturer(
-            id = lecturer["lecturer_id"],
-            name = lecturer["name"],
-            email = lecturer["email"],
-            subject = lecturer["subject_name"]
+            id=lecturer["lecturer_id"],
+            name=lecturer["name"],
+            email=lecturer["email"],
+            subject=lecturer["subject_name"],
         )
         for lecturer in lecturers_raw
     ]

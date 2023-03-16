@@ -16,39 +16,34 @@ async def user_of_day(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
     if await is_required_group(update):
         try:
             list(await get_todays_user())[0]
-            await send_text(
-                update,
-                context,
-                "Сегодня выбор уже сделан"
-            )
+            await send_text(update, context, "Сегодня выбор уже сделан")
             return
         except IndexError:
             users = list(await get_users())
-            
+
             user = secrets.choice(users)
             id = user.id
             user_id = user.user_id
             try:
                 user = await get_chat_member(update, context, user_id)
                 if user.username is None:
-                    user_name = f"<a href='tg://user?id={user_id}'>{user.first_name}</a>"
+                    user_name = (
+                        f"<a href='tg://user?id={user_id}'>{user.first_name}</a>"
+                    )
                 else:
                     user_name = f"@{user.username}"
 
                 await write_todays_user(id)
 
-                if not update.message: return
+                if not update.message:
+                    return
 
                 phrases = secrets.choice(list(await get_all_phrases()))
                 phrases = phrases.phrase.split(";")
                 for phrase in phrases:
                     await send_text(update, context, phrase)
 
-                await send_text(
-                    update,
-                    context,
-                    f"{user_name} пиdор дня"
-                )
+                await send_text(update, context, f"{user_name} пиdор дня")
                 return
             except error.BadRequest:
                 await send_text(update, context, "Пользователь не найден")
@@ -65,11 +60,7 @@ async def user_stat(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         try:
             list_of_champions = list(await get_champions())
             if list_of_champions == []:
-                await send_text(
-                    update,
-                    context,
-                    "Пока статистика пуста"
-                )
+                await send_text(update, context, "Пока статистика пуста")
                 return
             else:
                 out_list = []
@@ -77,19 +68,15 @@ async def user_stat(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                     user_id = champion.user_id
                     user = await get_chat_member(update, context, user_id)
 
-                    out_list.append((
-                        i, 
-                        user.first_name, 
-                        await get_quantity(user_id)
-                    ))
+                    out_list.append((i, user.first_name, await get_quantity(user_id)))
                 await send_text(
-                        update,
-                        context,
-                        render_template(
-                            template,
-                            {"champions": out_list},
-                        ),
-                    )
+                    update,
+                    context,
+                    render_template(
+                        template,
+                        {"champions": out_list},
+                    ),
+                )
                 return
         except error.BadRequest:
             await send_text(update, context, "Пользователь не найден")

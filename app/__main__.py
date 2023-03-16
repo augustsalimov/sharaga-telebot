@@ -32,7 +32,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-if not config.TELEGRAM_BOT_TOKEN: # or not config.TELEGRAM_BOT_CHANNEL_ID:
+if not config.TELEGRAM_BOT_TOKEN:  # or not config.TELEGRAM_BOT_CHANNEL_ID:
     raise ValueError("env variables wasn't implemented")
 
 
@@ -44,8 +44,7 @@ def main():
 
     application.add_handler(
         MessageHandler(
-            filters.TEXT  & (~filters.Sticker.ALL & ~filters.COMMAND), 
-            handlers.main
+            filters.TEXT & (~filters.Sticker.ALL & ~filters.COMMAND), handlers.main
         )
     )
 

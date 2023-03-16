@@ -1,8 +1,6 @@
 # SharagaNouBOT
 [![status](https://img.shields.io/badge/status-active-success.svg?style=flat-square)](https://github.com/augustsalimov/sharaga-telebot) 
 [![last commit](https://img.shields.io/github/last-commit/augustsalimov/sharaga-telebot?style=flat-square)](https://github.com/augustsalimov/sharaga-telebot/commits/develop)<br>
-[![issues](https://img.shields.io/github/issues/augustsalimov/sharaga-telebot?style=flat-square)](https://github.com/augustsalimov/sharaga-telebot/issues) 
-[![pull requests](https://img.shields.io/github/issues-pr/augustsalimov/sharaga-telebot?style=flat-square)](https://github.com/augustsalimov/sharaga-telebot/pulls)<br>
 This is repo of python scripted telegram bot for local university group. Main purpose is to provide students with schedule, links and contacts. Also it has some other features like answering to messages.
 
 ## Table of Contents

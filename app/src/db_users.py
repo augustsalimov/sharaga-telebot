@@ -35,8 +35,8 @@ async def _get_users_from_db(sql: str) -> Iterable[User]:
     user_raw = await fetch_all(sql)
     return [
         User(
-            id = user["id"],
-            user_id = user["user_id"],
+            id=user["id"],
+            user_id=user["user_id"],
         )
         for user in user_raw
     ]
@@ -103,16 +103,16 @@ def _user_days_base_sql_request() -> str:
 
 async def _get_quantity_from_db(sql: str) -> int:
     quantity_raw = await fetch_all(sql)
-    return quantity_raw[0]['COUNT(u.user_id)']
+    return quantity_raw[0]["COUNT(u.user_id)"]
 
 
 async def _get_user_days_from_db(sql: str) -> Iterable[UserDay]:
     user_day_raw = await fetch_all(sql)
     return [
         UserDay(
-            id = user_day["id"],
-            date = user_day["my_date"],
-            user_id = user_day["user_id"],
+            id=user_day["id"],
+            date=user_day["my_date"],
+            user_id=user_day["user_id"],
         )
         for user_day in user_day_raw
     ]

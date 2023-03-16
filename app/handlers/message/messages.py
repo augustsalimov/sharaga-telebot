@@ -3,7 +3,15 @@ from telegram.ext import ContextTypes
 
 from app.config import ADMIN_USER_ID
 from app.handlers.bot import send_text, send_sticker, get_chat_member
-from app.handlers import today, tommorow, this_week, next_week, full_schedule, user_stat, user_of_day
+from app.handlers import (
+    today,
+    tommorow,
+    this_week,
+    next_week,
+    full_schedule,
+    user_stat,
+    user_of_day,
+)
 from app.templates import render_template
 from app.src.phrases import PHRASES, REPEATED, STICKS
 from app.src.db_users import get_all_users
@@ -15,7 +23,7 @@ async def main(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     original_text = message.text
     lower_text = original_text.lower()
     user_id = str(message.from_user.id)
-    
+
     if "пиздюк" in lower_text:
         if user_id == ADMIN_USER_ID:
             await admin(update, context, lower_text.split("пиздюк")[1])
@@ -27,7 +35,7 @@ async def main(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         await schedule_commands(update, context, lower_text)
     if "пидор" in lower_text:
         await user_commands(update, context, lower_text)
-    
+
     if "аджарски" in lower_text:
         await send_text(
             update,
@@ -45,7 +53,7 @@ async def main(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             for i in range(3):
                 await send_text(update, context, phrase)
             return
-        
+
     for key in PHRASES:
         if key in lower_text:
             phrase = await get_phrase(key)
@@ -54,7 +62,7 @@ async def main(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             for i in phrase:
                 await send_text(update, context, i)
             return
-        
+
     for key in STICKS:
         if key in lower_text:
             phrase = await get_phrase(key)
@@ -62,35 +70,36 @@ async def main(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             await send_sticker(update, context, sticker_id)
             return
 
-    if all(word in lower_text for word in ["меня", "не будет"]) \
-    or all(word in lower_text for word in ["сегодня", "не буду"]):
+    if (
+        all(word in lower_text for word in ["меня", "не будет"])
+        or all(word in lower_text for word in ["сегодня", "не буду"])
+        or "не приеду" in lower_text
+    ):
         sticker_id = "CAACAgIAAx0CbHmS5AACATNj7mqGShm_DT7LTmxDQac1jd-m7gACeSgAAlTQIEtXt23OvdXsBC4E"
         await send_sticker(update, context, sticker_id)
         return
-    
+
 
 async def admin(update: Update, context: ContextTypes.DEFAULT_TYPE, text: str) -> None:
     if "отметь всех" in text:
         try:
             users_list = []
             users = await get_all_users()
-            
+
             for user in users:
                 user_id = user.user_id
                 user = await get_chat_member(update, context, user_id)
                 if user.username is None:
-                    user_name = f"<a href='tg://user?id={user_id}'>{user.first_name}</a>"
+                    user_name = (
+                        f"<a href='tg://user?id={user_id}'>{user.first_name}</a>"
+                    )
                 else:
                     user_name = f"@{user.username}"
                 users_list.append(user_name)
 
             await send_text(update, context, "Хорошо, Босс")
 
-            await send_text(
-                update,
-                context,
-                " ".join(i for i in users_list)
-            )
+            await send_text(update, context, " ".join(i for i in users_list))
         except error.BadRequest:
             await send_text(update, context, "Босс, некоторые пользователи не найдены")
     elif "я опоздаю" in text:
@@ -100,7 +109,9 @@ async def admin(update: Update, context: ContextTypes.DEFAULT_TYPE, text: str) -
     return
 
 
-async def schedule_commands(update: Update, context: ContextTypes.DEFAULT_TYPE, text: str) -> None:
+async def schedule_commands(
+    update: Update, context: ContextTypes.DEFAULT_TYPE, text: str
+) -> None:
     dict_ = {
         "сегодня": today,
         "завтра": tommorow,
@@ -111,14 +122,16 @@ async def schedule_commands(update: Update, context: ContextTypes.DEFAULT_TYPE, 
         "весь семестр": full_schedule,
     }
     for key, val in dict_.items():
-        if key in text: 
+        if key in text:
             await val(update, context)
             return
     await send_text(update, context, "Кто-то сказал пара?")
     return
 
 
-async def user_commands(update: Update, context: ContextTypes.DEFAULT_TYPE, text: str) -> None:
+async def user_commands(
+    update: Update, context: ContextTypes.DEFAULT_TYPE, text: str
+) -> None:
     if "выбери" in text:
         await user_of_day(update, context)
         return

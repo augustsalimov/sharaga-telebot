@@ -46,7 +46,7 @@ def _weekday() -> str:
 
 
 def _timenow() -> datetime:
-    return datetime.now(pytz.timezone('Europe/Moscow'))
+    return datetime.now(pytz.timezone("Europe/Moscow"))
 
 
 def _typer(date: datetime) -> str:

@@ -70,12 +70,12 @@ async def _get_days_from_db(sql: str) -> Iterable[Day]:
     day_raw = await fetch_all(sql)
     return [
         Day(
-            id = day["id"],
-            date = '-'.join(day["my_date"].split('-')[::-1]),
-            l_s = day["l_s"],
-            cab = day["cab"],
-            lecturer_name = day["lecturer_name"],
-            subject_name = day["subject_name"]
+            id=day["id"],
+            date="-".join(day["my_date"].split("-")[::-1]),
+            l_s=day["l_s"],
+            cab=day["cab"],
+            lecturer_name=day["lecturer_name"],
+            subject_name=day["subject_name"],
         )
         for day in day_raw
     ]
