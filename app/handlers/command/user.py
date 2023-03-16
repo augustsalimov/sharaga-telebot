@@ -6,10 +6,15 @@ from telegram.ext import ContextTypes
 
 from handlers.bot import send_text, get_chat_member
 from handlers.bot import is_required_group, only_required_group_text
-from services.db_users import get_users, get_todays_user, write_todays_user
-from services.db_users import get_champions, get_quantity
+from services.db_users import (
+    get_users,
+    get_todays_user,
+    write_todays_user,
+    get_champions,
+    get_quantity,
+)
 from services.db_phrases import get_all_phrases
-from templates import render_template
+from core.templates import render_template
 
 
 async def user_of_day(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:

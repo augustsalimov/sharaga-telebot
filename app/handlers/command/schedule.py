@@ -1,13 +1,15 @@
 from telegram import Update
 from telegram.ext import ContextTypes
 
-from settings import FILES_DIR
+from core.settings import FILES_DIR
 from handlers.bot import send_text, send_document
-from services.db_days import get_today_schedule
-from services.db_days import get_tomorrow_schedule
-from services.db_days import get_schedule_for_this_week
-from services.db_days import get_schedule_for_next_week
-from templates import render_template
+from services.db_days import (
+    get_today_schedule,
+    get_tomorrow_schedule,
+    get_schedule_for_this_week,
+    get_schedule_for_next_week,
+)
+from core.templates import render_template
 
 
 SINGLE_LESSON_TEMPLATE = "single.j2"

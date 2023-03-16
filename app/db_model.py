@@ -4,7 +4,7 @@ import aiosqlite
 from collections.abc import Iterable
 from typing import Any
 
-import settings
+from core import settings
 
 
 async def get_db() -> aiosqlite.Connection:

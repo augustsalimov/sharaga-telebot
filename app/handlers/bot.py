@@ -5,7 +5,7 @@ from typing import cast
 from telegram import Chat, InlineKeyboardMarkup, Update
 from telegram.ext import ContextTypes
 
-from settings import bot_settings
+from core.settings import bot_settings
 
 
 async def send_text(

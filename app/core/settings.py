@@ -18,8 +18,7 @@ class BotSettings(BaseSettings):
 bot_settings = BotSettings()
 
 
-BASE_DIR = Path(__file__).resolve().parent
-print(BASE_DIR)
+BASE_DIR = Path(__file__).resolve().parent.parent
 SQLITE_DB_FILE = BASE_DIR / "db.sqlite3"
 TEMPLATES_DIR = BASE_DIR / "templates"
 FILES_DIR = BASE_DIR / "files"

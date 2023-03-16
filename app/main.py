@@ -1,5 +1,3 @@
-import logging
-
 from telegram.ext import (
     ApplicationBuilder,
     CommandHandler,
@@ -7,7 +5,9 @@ from telegram.ext import (
     filters,
 )
 
-import handlers, settings
+import handlers
+from core import settings
+from core import logger
 from db_model import close_db
 
 
@@ -24,12 +24,6 @@ COMMAND_HANDLERS = {
     "user_of_day": handlers.user_of_day,
     "user_stat": handlers.user_stat,
 }
-
-
-logging.basicConfig(
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO
-)
-logger = logging.getLogger(__name__)
 
 
 if (

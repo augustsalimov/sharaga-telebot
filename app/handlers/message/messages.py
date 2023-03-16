@@ -1,7 +1,7 @@
 from telegram import Update, error
 from telegram.ext import ContextTypes
 
-from settings import bot_settings
+from core.settings import bot_settings
 from handlers.bot import send_text, send_sticker, get_chat_member
 from handlers import (
     today,
@@ -12,7 +12,7 @@ from handlers import (
     user_stat,
     user_of_day,
 )
-from templates import render_template
+from core.templates import render_template
 from services.phrases import PHRASES, REPEATED, STICKS
 from services.db_users import get_all_users
 from services.db_phrases import get_phrase
