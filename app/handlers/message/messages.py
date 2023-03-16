@@ -1,9 +1,9 @@
 from telegram import Update, error
 from telegram.ext import ContextTypes
 
-from app.settings import bot_settings
-from app.handlers.bot import send_text, send_sticker, get_chat_member
-from app.handlers import (
+from settings import bot_settings
+from handlers.bot import send_text, send_sticker, get_chat_member
+from handlers import (
     today,
     tommorow,
     this_week,
@@ -12,10 +12,10 @@ from app.handlers import (
     user_stat,
     user_of_day,
 )
-from app.templates import render_template
-from app.services.phrases import PHRASES, REPEATED, STICKS
-from app.services.db_users import get_all_users
-from app.services.db_phrases import get_phrase
+from templates import render_template
+from services.phrases import PHRASES, REPEATED, STICKS
+from services.db_users import get_all_users
+from services.db_phrases import get_phrase
 
 
 async def main(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:

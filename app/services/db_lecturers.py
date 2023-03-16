@@ -1,7 +1,7 @@
 from collections.abc import Iterable
 from dataclasses import dataclass
 
-from app.db_model import fetch_all
+from db_model import fetch_all
 
 
 @dataclass

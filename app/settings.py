@@ -12,13 +12,14 @@ class BotSettings(BaseSettings):
     # TELEGRAM_BOT_CHANNEL_ID = int(os.getenv("TELEGRAM_BOT_CHANNEL_ID", "0"))
 
     class Config:
-        env_file = ".env"
+        env_file = "./.env"
 
 
 bot_settings = BotSettings()
 
 
 BASE_DIR = Path(__file__).resolve().parent
+print(BASE_DIR)
 SQLITE_DB_FILE = BASE_DIR / "db.sqlite3"
 TEMPLATES_DIR = BASE_DIR / "templates"
 FILES_DIR = BASE_DIR / "files"

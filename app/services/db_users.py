@@ -1,8 +1,8 @@
 from collections.abc import Iterable
 from dataclasses import dataclass
 
-from app.db_model import fetch_all, execute
-from app.services import mydatetime
+from db_model import fetch_all, execute
+from services import mydatetime
 
 
 @dataclass

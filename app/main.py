@@ -7,8 +7,8 @@ from telegram.ext import (
     filters,
 )
 
-from app import handlers, settings
-from app.db_model import close_db
+import handlers, settings
+from db_model import close_db
 
 
 COMMAND_HANDLERS = {

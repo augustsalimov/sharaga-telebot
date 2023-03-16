@@ -1,7 +1,7 @@
 import re
 import jinja2
 
-from app import settings
+import settings
 
 
 def render_template(template_name: str, data: dict | None = None) -> str:

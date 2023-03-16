@@ -1,0 +1,9 @@
+version: '3'
+services:
+  bot:
+    container_name: bot
+    build: ./app
+    env_file:
+      - .env
+    entrypoint: [ "bash", "./entrypoint.sh" ]
+    restart: on-failure
