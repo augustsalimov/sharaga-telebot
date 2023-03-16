@@ -13,9 +13,9 @@ from app.handlers import (
     user_of_day,
 )
 from app.templates import render_template
-from app.src.phrases import PHRASES, REPEATED, STICKS
-from app.src.db_users import get_all_users
-from app.src.db_phrases import get_phrase
+from app.services.phrases import PHRASES, REPEATED, STICKS
+from app.services.db_users import get_all_users
+from app.services.db_phrases import get_phrase
 
 
 async def main(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:

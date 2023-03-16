@@ -2,7 +2,7 @@ from telegram import Update
 from telegram.ext import ContextTypes
 
 from app.handlers.bot import send_text
-from app.src.db_lecturers import get_lecturers
+from app.services.db_lecturers import get_lecturers
 from app.templates import render_template
 
 

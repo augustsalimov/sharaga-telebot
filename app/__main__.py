@@ -32,12 +32,16 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-if not settings.bot_settings.TELEGRAM_BOT_TOKEN:  # or not settings.bot_settings.TELEGRAM_BOT_CHANNEL_ID:
+if (
+    not settings.bot_settings.TELEGRAM_BOT_TOKEN
+):  # or not settings.bot_settings.TELEGRAM_BOT_CHANNEL_ID:
     raise ValueError("env variables wasn't implemented")
 
 
 def main():
-    application = ApplicationBuilder().token(settings.bot_settings.TELEGRAM_BOT_TOKEN).build()
+    application = (
+        ApplicationBuilder().token(settings.bot_settings.TELEGRAM_BOT_TOKEN).build()
+    )
 
     for command_name, command_handler in COMMAND_HANDLERS.items():
         application.add_handler(CommandHandler(command_name, command_handler))

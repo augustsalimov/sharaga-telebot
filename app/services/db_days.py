@@ -2,7 +2,7 @@ from collections.abc import Iterable
 from dataclasses import dataclass
 
 from app.db_model import fetch_all
-from app.src import mydatetime
+from app.services import mydatetime
 
 
 @dataclass
