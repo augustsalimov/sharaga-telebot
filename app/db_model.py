@@ -4,12 +4,12 @@ import aiosqlite
 from collections.abc import Iterable
 from typing import Any
 
-from app import config
+from app import settings
 
 
 async def get_db() -> aiosqlite.Connection:
     if not getattr(get_db, "db", None):
-        db = await aiosqlite.connect(config.SQLITE_DB_FILE)
+        db = await aiosqlite.connect(settings.SQLITE_DB_FILE)
         get_db.db = db
 
     return get_db.db

@@ -5,7 +5,7 @@ from typing import cast
 from telegram import Chat, InlineKeyboardMarkup, Update
 from telegram.ext import ContextTypes
 
-from app.config import CHAT_ID
+from app.settings import bot_settings
 
 
 async def send_text(
@@ -100,7 +100,7 @@ async def is_group(
 async def is_required_group(
     update: Update,
 ) -> bool:
-    return True if str(_get_chat_id(update)) == str(CHAT_ID) else False
+    return True if str(_get_chat_id(update)) == str(bot_settings.CHAT_ID) else False
 
 
 async def only_required_group_text(

@@ -1,7 +1,7 @@
 from telegram import Update
 from telegram.ext import ContextTypes
 
-from app.config import FILES_DIR
+from app.settings import FILES_DIR
 from app.handlers.bot import send_text, send_document
 from app.src.db_days import get_today_schedule
 from app.src.db_days import get_tomorrow_schedule

@@ -1,7 +1,7 @@
 from telegram import Update, error
 from telegram.ext import ContextTypes
 
-from app.config import ADMIN_USER_ID
+from app.settings import bot_settings
 from app.handlers.bot import send_text, send_sticker, get_chat_member
 from app.handlers import (
     today,
@@ -25,7 +25,7 @@ async def main(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     user_id = str(message.from_user.id)
 
     if "пиздюк" in lower_text:
-        if user_id == ADMIN_USER_ID:
+        if user_id == bot_settings.ADMIN_USER_ID:
             await admin(update, context, lower_text.split("пиздюк")[1])
         else:
             await send_text(update, context, "От пиздюка слышу")
