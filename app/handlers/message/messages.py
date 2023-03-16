@@ -19,65 +19,68 @@ from services.db_phrases import get_phrase
 
 
 async def main(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    message = update.message
-    original_text = message.text
-    lower_text = original_text.lower()
-    user_id = str(message.from_user.id)
+    try:
+        message = update.message
+        original_text = message.text
+        lower_text = original_text.lower()
+        user_id = str(message.from_user.id)
 
-    if "пиздюк" in lower_text:
-        if user_id == bot_settings.ADMIN_USER_ID:
-            await admin(update, context, lower_text.split("пиздюк")[1])
-        else:
-            await send_text(update, context, "От пиздюка слышу")
-        return
-
-    if "пар" in lower_text:
-        await schedule_commands(update, context, lower_text)
-    if "пидор" in lower_text:
-        await user_commands(update, context, lower_text)
-
-    if "аджарски" in lower_text:
-        await send_text(
-            update,
-            context,
-            render_template(
-                "recipe.j2",
-            ),
-        )
-        return
-
-    for key in REPEATED:
-        if key in original_text:
-            phrase = await get_phrase(key)
-            phrase = phrase[0].phrase
-            for i in range(3):
-                await send_text(update, context, phrase)
+        if "пиздюк" in lower_text:
+            if user_id == bot_settings.ADMIN_USER_ID:
+                await admin(update, context, lower_text.split("пиздюк")[1])
+            else:
+                await send_text(update, context, "От пиздюка слышу")
             return
 
-    for key in PHRASES:
-        if key in lower_text:
-            phrase = await get_phrase(key)
-            phrase = phrase[0].phrase
-            phrase = phrase.split(";")
-            for i in phrase:
-                await send_text(update, context, i)
+        if "пар" in lower_text:
+            await schedule_commands(update, context, lower_text)
+        if "пидор" in lower_text:
+            await user_commands(update, context, lower_text)
+
+        if "аджарски" in lower_text:
+            await send_text(
+                update,
+                context,
+                render_template(
+                    "recipe.j2",
+                ),
+            )
             return
 
-    for key in STICKS:
-        if key in lower_text:
-            phrase = await get_phrase(key)
-            sticker_id = phrase[0].phrase
+        for key in REPEATED:
+            if key in original_text:
+                phrase = await get_phrase(key)
+                phrase = phrase[0].phrase
+                for i in range(3):
+                    await send_text(update, context, phrase)
+                return
+
+        for key in PHRASES:
+            if key in lower_text:
+                phrase = await get_phrase(key)
+                phrase = phrase[0].phrase
+                phrase = phrase.split(";")
+                for i in phrase:
+                    await send_text(update, context, i)
+                return
+
+        for key in STICKS:
+            if key in lower_text:
+                phrase = await get_phrase(key)
+                sticker_id = phrase[0].phrase
+                await send_sticker(update, context, sticker_id)
+                return
+
+        if (
+            all(word in lower_text for word in ["меня", "не будет"])
+            or all(word in lower_text for word in ["сегодня", "не буду"])
+            or "не приеду" in lower_text
+        ):
+            sticker_id = "CAACAgIAAx0CbHmS5AACATNj7mqGShm_DT7LTmxDQac1jd-m7gACeSgAAlTQIEtXt23OvdXsBC4E"
             await send_sticker(update, context, sticker_id)
             return
-
-    if (
-        all(word in lower_text for word in ["меня", "не будет"])
-        or all(word in lower_text for word in ["сегодня", "не буду"])
-        or "не приеду" in lower_text
-    ):
-        sticker_id = "CAACAgIAAx0CbHmS5AACATNj7mqGShm_DT7LTmxDQac1jd-m7gACeSgAAlTQIEtXt23OvdXsBC4E"
-        await send_sticker(update, context, sticker_id)
-        return
+    except AttributeError:
+        pass
 
 
 async def admin(update: Update, context: ContextTypes.DEFAULT_TYPE, text: str) -> None:

@@ -15,6 +15,7 @@ from services.db_users import (
 )
 from services.db_phrases import get_all_phrases
 from core.templates import render_template
+from core.logger import logger
 
 
 async def user_of_day(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -40,17 +41,17 @@ async def user_of_day(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
 
                 await write_todays_user(id)
 
-                if not update.message:
-                    return
-
                 phrases = secrets.choice(list(await get_all_phrases()))
                 phrases = phrases.phrase.split(";")
                 for phrase in phrases:
                     await send_text(update, context, phrase)
 
                 await send_text(update, context, f"{user_name} пиdор дня")
+
+                user_stat(update, context)
                 return
-            except error.BadRequest:
+            except error.BadRequest as e:
+                logger.error(e)
                 await send_text(update, context, "Пользователь не найден")
                 return
     else:
@@ -83,7 +84,8 @@ async def user_stat(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                     ),
                 )
                 return
-        except error.BadRequest:
+        except error.BadRequest as e:
+            logger.error(e)
             await send_text(update, context, "Пользователь не найден")
             return
     else:

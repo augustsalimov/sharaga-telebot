@@ -51,7 +51,7 @@ class UserDay:
 
 async def get_todays_user() -> Iterable[UserDay]:
     sql = f"""{_user_days_base_sql_request()}
-        WHERE m.my_date = "{mydatetime.today()}" """
+        WHERE s.my_date = "{mydatetime.today()}" """
     user = await _get_user_days_from_db(sql)
     return user
 
