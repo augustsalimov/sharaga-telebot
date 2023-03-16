@@ -51,7 +51,6 @@ Now you can run it with `poetry run python -m app` command.
 ## TODO <a name="todo"></a>
 /deadlines<br>
 /user bugfix<br>
-/user_stat after /user<br>
 Next class if there are no class today<br>
 Memes<br>
 code refactoring<br><br>
@@ -59,6 +58,4 @@ R&D - automate proccess of downloading schedule file<br>
 script for parsing of the file and writing it to the db<br>
 maintenance mode<br>
 ci/cd<br>
-tests<br>
-pre-commit<br>
 systemd<br>

@@ -36,11 +36,11 @@ async def execute(
         await db.commit()
 
 
-def close_db():
+def close_db() -> None:
     asyncio.run(_async_close_db())
 
 
-async def _async_close_db():
+async def _async_close_db() -> None:
     await (await get_db()).close()
 
 

@@ -30,7 +30,7 @@ if not bot_settings.TELEGRAM_BOT_TOKEN:
     raise ValueError("env variables wasn't implemented")
 
 
-def main():
+def main() -> None:
     application = ApplicationBuilder().token(bot_settings.TELEGRAM_BOT_TOKEN).build()
 
     for command_name, command_handler in COMMAND_HANDLERS.items():
