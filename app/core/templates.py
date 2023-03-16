@@ -1,7 +1,8 @@
 import re
+
 import jinja2
 
-from core import settings
+from core import TEMPLATES_DIR
 
 
 def render_template(template_name: str, data: dict | None = None) -> str:
@@ -18,7 +19,7 @@ def render_template(template_name: str, data: dict | None = None) -> str:
 
 def _get_template_env():
     if not getattr(_get_template_env, "template_env", None):
-        template_loader = jinja2.FileSystemLoader(searchpath=settings.TEMPLATES_DIR)
+        template_loader = jinja2.FileSystemLoader(searchpath=TEMPLATES_DIR)
         env = jinja2.Environment(
             loader=template_loader,
             trim_blocks=True,

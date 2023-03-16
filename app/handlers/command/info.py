@@ -3,7 +3,7 @@ from telegram.ext import ContextTypes
 
 from handlers.bot import send_text
 from services.db_lecturers import get_lecturers
-from core.templates import render_template
+from core import render_template
 
 
 async def links(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:

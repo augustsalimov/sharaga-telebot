@@ -14,8 +14,8 @@ from services.db_users import (
     get_quantity,
 )
 from services.db_phrases import get_all_phrases
-from core.templates import render_template
-from core.logger import logger
+from core import render_template
+from core import logger
 
 
 async def user_of_day(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:

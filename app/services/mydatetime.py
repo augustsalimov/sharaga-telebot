@@ -1,7 +1,7 @@
-import pytz
-
 from datetime import datetime, timedelta
 from collections.abc import Iterable
+
+import pytz
 
 
 def this_week_dates() -> Iterable[str]:
