@@ -6,4 +6,4 @@ services:
     env_file:
       - .env
     entrypoint: [ "bash", "./entrypoint.sh" ]
-    restart: on-failure
+    restart: always

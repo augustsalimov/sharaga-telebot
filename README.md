@@ -11,7 +11,7 @@ This is repo of python scripted telegram bot for local university group. Main pu
 - [TODO](#todo)
 
 ## Tech stack <a name="stack"></a>
-Python 3.11, python-telegram-bot, sqlite, jinja2.<br>
+Python 3.11, python-telegram-bot, aiosqlite, jinja2, docker.<br>
 
 ## Commands <a name="commands"></a>
 - `/start` - welcome message
@@ -27,35 +27,24 @@ Python 3.11, python-telegram-bot, sqlite, jinja2.<br>
 - `/user_stat` - statistics<br>
 
 ## Getting Started <a name="getting_started"></a>
-These instructions will get you a copy of the project up and running on your local machine for development 
-and testing purposes.<br> 
-NOTE: instructions only for unix-like systems.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
 ### Installing
-
 First of all, install docker.<br>
 Then clone this git repository `git clone git@github.com:augustsalimov/sharaga-telebot.git`.<br>
-Give permissions to the bash scripts and run them.
-```
-chmod +x init.sh
-chmod +x db.sh
-sudo ./init.sh
-sudo ./db.sh
-```
-Fill in `.env` file.<br>
+Create and fill in `.env` file.<br>
+Create db with command `cat ./app/db.sql | sqlite3 ./app/db.sqlite3`.<br>
 Fill db with data.<br>
 
 ### Running
-Now you can run it with `poetry run python -m app` command.
+Now you can run project with `docker-compose up --build -d` command.
 
 ## TODO <a name="todo"></a>
 /deadlines<br>
 /user bugfix<br>
 Next class if there are no class today<br>
-Memes<br>
-code refactoring<br><br>
+Memes<br><br>
+code refactoring<br>
 R&D - automate proccess of downloading schedule file<br>
 script for parsing of the file and writing it to the db<br>
-maintenance mode<br>
 ci/cd<br>
-systemd<br>

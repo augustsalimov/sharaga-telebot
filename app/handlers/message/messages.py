@@ -1,7 +1,7 @@
 from telegram import Update, error
 from telegram.ext import ContextTypes
 
-from core import bot_settings, render_template
+from core import bot_settings, logger
 from handlers.bot import send_text, send_sticker, get_chat_member
 from handlers import (
     today,
@@ -58,8 +58,8 @@ async def main(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                 sticker_id = "CAACAgIAAx0CbHmS5AACATNj7mqGShm_DT7LTmxDQac1jd-m7gACeSgAAlTQIEtXt23OvdXsBC4E"
                 await send_sticker(update, context, sticker_id)
                 return
-    except AttributeError:
-        pass
+    except AttributeError as e:
+        logger.error(e)
 
 
 async def admin(update: Update, context: ContextTypes.DEFAULT_TYPE, text: str) -> None:
