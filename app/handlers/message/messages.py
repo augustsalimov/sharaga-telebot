@@ -24,6 +24,13 @@ async def main(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         lower_text = original_text.lower()
         user_id = str(message.from_user.id)
 
+        if "антон" in lower_text and user_id in (
+            "1099752474",
+            bot_settings.ADMIN_USER_ID,
+        ):
+            await send_text(update, context, "Фариду друг")
+            return
+
         if "пиздюк" in lower_text and user_id == bot_settings.ADMIN_USER_ID:
             await admin(update, context, lower_text.split("пиздюк")[1])
         else:
